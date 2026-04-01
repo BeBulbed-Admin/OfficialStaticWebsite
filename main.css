@@ -471,50 +471,55 @@ textarea.form-field {
     font-weight: 300;
 }
 
-/* --- 12. SUBPAGE OVERRIDES & DYNAMIC HEADER --- */
+/* --- 12. DYNAMIC SUBPAGE HEADER FIX --- */
 
-/* Force the nav bar to stay locked at the top */
+/* Permanently lock the nav bar to the top of subpages */
 .subpage-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgba(17, 17, 17, 0.9) !important; 
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    
+    /* OVERRIDE HOMEPAGE HIDE LOGIC */
     transform: translateY(0) !important;
     animation: none !important;
     animation-timeline: auto !important;
-    background: rgba(17, 17, 17, 0.85) !important; 
-    backdrop-filter: blur(20px);
-    height: 70px;
-    display: flex;
 }
 
-/* The centered container for BB and the page title */
 .nav-center-dynamic {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    top: 0;
     height: 100%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* The BB Logo inside the subpage header */
 .nav-logo-link {
     display: flex !important;
     align-items: center !important;
     color: #ffffff !important;
     font-size: 2.2rem !important;
     text-decoration: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
 }
 
-/* The Subpage Title that expands next to the logo */
 .nav-dynamic-title {
     font-size: 1.3rem;
-    color: var(--zinc-text); /* Muted gray to separate it from the white logo */
+    color: var(--zinc-text);
     white-space: nowrap;
     overflow: hidden;
+    
+    /* ANIMATION: Expand Newsroom and Slide BB Left */
     animation: expandNavTitle linear both;
     animation-timeline: scroll();
-    animation-range: 80px 220px; /* Expands smoothly as user scrolls down */
+    animation-range: 50px 180px; 
 }
 
 @keyframes expandNavTitle {
@@ -526,35 +531,31 @@ textarea.form-field {
     100% { 
         max-width: 200px; 
         opacity: 1; 
-        margin-left: 15px; /* Adds space between BB and Newsroom */
+        margin-left: 15px; 
     }
 }
 
-/* Fade out the big on-page title so it seamlessly "transfers" to the header */
 .subpage-title {
     font-size: clamp(2rem, 5vw, 3.5rem);
     letter-spacing: -0.02em;
     margin-bottom: 40px;
     color: #fff;
     text-align: center;
+    
+    /* Fade out main title as you scroll */
     animation: fadeOutMainTitle linear both;
     animation-timeline: scroll();
-    animation-range: 0px 180px; 
+    animation-range: 0px 150px; 
 }
 
 @keyframes fadeOutMainTitle {
     to { 
         opacity: 0; 
-        transform: translateY(-40px) scale(0.95); 
+        transform: translateY(-20px); 
     }
 }
 
-/* Mobile size fix */
 @media (max-width: 768px) {
-    .nav-logo-link {
-        font-size: 1.8rem !important;
-    }
-    .nav-dynamic-title {
-        font-size: 1rem;
-    }
+    .nav-logo-link { font-size: 1.8rem !important; }
+    .nav-dynamic-title { font-size: 1rem; }
 }
