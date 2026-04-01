@@ -12,48 +12,48 @@
 </head>
 <body class="bg-[#0d0d0d] text-white overflow-x-hidden font-helvetica">
 
-    <nav class="sticky-nav">
-        <div class="nav-inner">
-            <div class="nav-logo-left font-baumans"><span class="flip-b">B</span>B</div>
-            <div class="nav-right">
-                </div>
-        </div>
-    </nav>
+    <div class="top-fade-mask"></div>
+
+    <div class="scrolled-nav-bg"></div>
 
     <header class="logo-hero-container">
         <h1 class="hero-logo font-baumans">
-            <span class="flip-b">B</span>eBulbed
+            <span class="flip-b">B</span><span class="collapse-text">e</span>B<span class="collapse-text">ulbed</span>
         </h1>
     </header>
 
-    <div class="reveal-container slogan-reveal">
-        <h2 class="body-slogan">"Inspired by the world we live in. Driven by the one we want to see."</h2>
-    </div>
+    <main class="content-section">
+        
+        <div class="reveal-container">
+            <h2 class="body-slogan">"Inspired by the world we live in. Driven by the one we want to see."</h2>
+        </div>
 
-    <div class="reveal-container para-reveal">
-        <p class="body-para">
-            The world isn't finished yet, and neither are we. 
-            At <span class="font-baumans"><span class="flip-b">B</span>eBulbed</span>, we believe that the way we live today 
-            shouldn't dictate how we live tomorrow. Every great 
-            shift starts with a single spark — a moment of clarity 
-            that illuminates a better path forward. Step into a new reality. 
-            <br><br>
-            <span class="font-baumans"><span class="flip-b">B</span>eInspired. <span class="flip-b">B</span>eBulbed.</span>
-        </p>
-    </div>
+        <div class="reveal-container">
+            <p class="body-para">
+                The world isn't finished yet, and neither are we. 
+                At <span class="font-baumans"><span class="flip-b">B</span>eBulbed</span>, we believe that the way we live today 
+                shouldn't dictate how we live tomorrow. Every great 
+                shift starts with a single spark — a moment of clarity 
+                that illuminates a better path forward. Step into a new reality. 
+                <br><br>
+                <span class="font-baumans"><span class="flip-b">B</span>eInspired. <span class="flip-b">B</span>eBulbed.</span>
+            </p>
+        </div>
 
-    <div class="reveal-container blocks-reveal">
-        <div class="t-grid-container">
-            <div class="t-row-top">
-                <a href="/spark" class="box-card"><h3 class="box-title">Spark</h3></a>
-                <a href="/glow" class="box-card"><h3 class="box-title">Glow</h3></a>
-                <a href="/blast" class="box-card"><h3 class="box-title">Blast</h3></a>
-            </div>
-            <div class="t-row-bottom">
-                <a href="/social" class="box-card"><h3 class="box-title">Social</h3></a>
+        <div class="reveal-container">
+            <div class="t-grid-container">
+                <div class="t-row-top">
+                    <a href="/spark" class="box-card"><h3 class="box-title">Spark</h3></a>
+                    <a href="/glow" class="box-card"><h3 class="box-title">Glow</h3></a>
+                    <a href="/blast" class="box-card"><h3 class="box-title">Blast</h3></a>
+                </div>
+                <div class="t-row-bottom">
+                    <a href="/social" class="box-card"><h3 class="box-title">Social</h3></a>
+                </div>
             </div>
         </div>
-    </div>
+
+    </main>
 
     <div class="scroll-prompt">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -61,26 +61,35 @@
         </svg>
     </div>
 
-    <main class="content-wrapper"></main>
-
     <footer class="footer-system">
         <div class="footer-inner">
-            <div class="footer-left">
-                <span class="footer-text">Copyright © 2026</span>
-                <span class="footer-logo font-baumans"><span class="flip-b">B</span>eBulbed Inc.</span>
-                <span class="footer-text">All rights reserved.</span>
+            
+            <div class="footer-directory">
+                <details class="apple-accordion">
+                    <summary class="apple-summary">
+                        About Us
+                        <svg class="apple-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </summary>
+                    <div class="apple-accordion-content">
+                        <a href="/newsroom" class="footer-link">Newsroom</a>
+                        <a href="/contact" class="footer-link">Contact</a>
+                    </div>
+                </details>
             </div>
-            <div class="footer-right">
-                <a href="/about" class="footer-link">About Us</a>
-                <span class="footer-divider">|</span>
-                <a href="/newsroom" class="footer-link">Newsroom</a>
-                <span class="footer-divider">|</span>
-                <a href="/contact" class="footer-link">Contact Us</a>
-                <span class="footer-divider">|</span>
-                <a href="/privacy" class="footer-link">Privacy Policy</a>
-                <span class="footer-divider">|</span>
-                <a href="/terms" class="footer-link">Terms of Use</a>
+            
+            <div class="footer-bottom">
+                <div class="footer-left">
+                    <span class="footer-text">Copyright © 2026 BeBulbed Inc. All rights reserved.</span>
+                </div>
+                <div class="footer-right">
+                    <a href="/privacy" class="footer-link">Privacy Policy</a>
+                    <span class="footer-divider">|</span>
+                    <a href="/terms" class="footer-link">Terms of Use</a>
+                </div>
             </div>
+
         </div>
     </footer>
 

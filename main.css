@@ -4,7 +4,6 @@
     --bg-alt: #111111; 
     --border: rgba(255, 255, 255, 0.14); 
     --zinc-text: #a1a1a1;
-    --nav-height: 70px;
     --transition-speed: 0.4s;
 }
 
@@ -26,54 +25,41 @@ body, .font-helvetica {
 .font-baumans { font-family: 'Baumans', cursive; }
 .flip-b { display: inline-block; transform: scaleX(-1); }
 
-/* --- 2. FALLING NAVIGATION --- */
-.sticky-nav {
+/* --- 2. TOP MASKS & BARS --- */
+.top-fade-mask {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--nav-height);
-    background: rgba(17, 17, 17, 0.85); 
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-    transform: translateY(-100%);
-    animation: navFall linear both;
-    animation-timeline: scroll();
-    animation-range: 10% 25%;
+    height: 25vh; 
+    background: linear-gradient(to bottom, var(--bg) 20%, transparent 100%);
+    z-index: 900; 
+    pointer-events: none;
 }
 
-@keyframes navFall {
-    from { transform: translateY(-100%); }
-    to { transform: translateY(0); }
-}
-
-.nav-inner {
-    width: 92%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-logo-left {
-    font-size: 2.2rem;
-    color: #fff;
-    letter-spacing: -0.05em;
-    font-weight: 500;
-}
-
-.nav-right {
-    display: flex;
-    gap: 45px;
-    align-items: center;
-}
-
-/* --- 3. HERO NAME GLIDE --- */
-.logo-hero-container {
+.scrolled-nav-bg {
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: var(--bg-alt); /* Matches footer */
+    border-bottom: 1px solid var(--border); /* Matches footer line */
+    z-index: 950;
+    pointer-events: none;
+    animation: navBarReveal linear both;
+    animation-timeline: scroll();
+    animation-range: 200px 400px; /* Fades in smoothly */
+}
+
+@keyframes navBarReveal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* --- 3. SHRINKING HERO LOGO & TEXT COLLAPSE --- */
+.logo-hero-container {
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
@@ -81,7 +67,7 @@ body, .font-helvetica {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 500;
+    z-index: 1000; 
     pointer-events: none;
 }
 
@@ -89,40 +75,59 @@ body, .font-helvetica {
     font-size: clamp(4rem, 22vw, 13rem);
     display: flex;
     align-items: center;
-    will-change: transform;
-    animation: logoGlideUp linear both;
+    animation: logoShrink linear both;
     animation-timeline: scroll();
-    animation-range: 0% 45%;
+    animation-range: 0px 400px; 
 }
 
-@keyframes logoGlideUp {
-    from { transform: translateY(0) scale(1); }
-    to { transform: translateY(-30vh) scale(0.35); }
+@keyframes logoShrink {
+    /* calc(-50vh + 40px) anchors the logo exactly in the middle of the 80px top bar */
+    to { transform: translateY(calc(-50vh + 40px)) scale(0.28); }
 }
 
-/* --- 4. THE SPLIT REVEAL SYSTEM --- */
+.collapse-text {
+    display: inline-block;
+    animation: textCollapse linear both;
+    animation-timeline: scroll();
+    animation-range: 0px 400px; /* Matches the logo shrink timeline perfectly */
+}
+
+@keyframes textCollapse {
+    0% { 
+        font-size: inherit; 
+        opacity: 1; 
+    }
+    100% { 
+        font-size: 0px; 
+        opacity: 0; 
+    }
+}
+
+/* --- 4. NATURAL REVEAL SYSTEM --- */
+.content-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15vh; 
+    padding: 100vh 20px 20vh 20px; 
+    position: relative;
+    z-index: 400; 
+}
+
 .reveal-container {
-    position: fixed;
-    top: 100vh;
-    left: 0;
     width: 100%;
     display: flex;
     justify-content: center;
-    z-index: 400;
-    padding: 0 20px;
-    will-change: transform, opacity;
-    animation: revealRise linear both;
-    animation-timeline: scroll();
+    animation: viewRise linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 30%; 
 }
 
-@keyframes revealRise {
-    from { transform: translateY(0); opacity: 0; filter: blur(15px); }
-    to { transform: translateY(var(--target-y)); opacity: 1; filter: blur(0); }
+@keyframes viewRise {
+    from { opacity: 0; transform: translateY(60px); filter: blur(10px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
-
-.slogan-reveal { --target-y: -67vh; animation-range: 20% 55%; }
-.para-reveal { --target-y: -60vh; animation-range: 25% 65%; }
-.blocks-reveal { --target-y: -35vh; animation-range: 30% 75%; }
 
 .body-slogan {
     font-size: 0.9rem; 
@@ -130,6 +135,7 @@ body, .font-helvetica {
     letter-spacing: 0.3em;
     color: var(--zinc-text); 
     font-weight: 500;
+    text-align: center;
 }
 
 .body-para {
@@ -164,53 +170,84 @@ body, .font-helvetica {
     justify-content: center;
     text-decoration: none;
     color: #fff;
+    pointer-events: auto; 
     transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.t-row-bottom .box-card { width: 260px; /* Stem of the T */ }
+.t-row-bottom .box-card { width: 260px; }
 .box-card:hover { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.3); transform: translateY(-3px); border-radius: 14px; }
 .box-title { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.8; }
 
-/* --- 6. FOOTER SYSTEM --- */
+/* --- 6. APPLE-STYLE FOOTER --- */
 .footer-system {
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    position: relative; 
     width: 100%;
-    height: 7vh;
-    border-top: 1px solid var(--border); 
-    background: var(--bg-alt); 
-    display: flex;
-    align-items: center;
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
     z-index: 600;
-    opacity: 0;
-    animation: footerReveal linear both;
-    animation-timeline: scroll();
-    animation-range: 85% 100%;
-}
-
-@keyframes footerReveal {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    padding: 30px 0 20px 0;
 }
 
 .footer-inner {
-    width: 92%;
+    width: 90%;
+    max-width: 1000px;
     margin: 0 auto;
+}
+
+/* The Dropdown Accordion */
+.footer-directory {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.apple-accordion { width: 100%; }
+
+.apple-summary {
+    list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 0;
+    font-size: 13px;
+    color: #f5f5f7;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
 }
 
-.footer-text, .footer-logo { font-size: 11.5px; color: var(--zinc-text); font-weight: 400; }
-.footer-logo { font-size: 12.5px; margin: 0 -1px; }
+.apple-summary::-webkit-details-marker { display: none; }
 
+.apple-chevron {
+    color: var(--zinc-text);
+    transition: transform var(--transition-speed) ease;
+}
+
+.apple-accordion[open] .apple-chevron { transform: rotate(180deg); }
+
+.apple-accordion-content {
+    padding: 10px 0 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Bottom Legal Section */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-text { font-size: 11.5px; color: var(--zinc-text); font-weight: 400; }
 .footer-left { display: flex; align-items: center; gap: 6px; }
 
 .footer-right {
     display: flex;
     align-items: center;
-    flex-wrap: wrap; /* Helps long lists fit nicely */
+    flex-wrap: wrap; 
 }
 
 .footer-link {
@@ -238,38 +275,37 @@ body, .font-helvetica {
     z-index: 10;
     animation: bounce 2s infinite, arrowExit linear both;
     animation-timeline: auto, scroll();
-    animation-range: 0s, 0% 10%;
+    animation-range: 0s, 0px 200px; 
 }
 
 @keyframes arrowExit { to { opacity: 0; visibility: hidden; } }
 @keyframes bounce { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -8px); } }
 
-/* --- 8. DEPTH CONTROL --- */
-.content-wrapper { height: 230vh; }
-
-/* --- 9. FINAL MOBILE REFINEMENT --- */
+/* --- 8. MOBILE REFINEMENT --- */
 @media (max-width: 768px) {
+
+    .scrolled-nav-bg {
+        height: 70px; /* Slimmer top bar for mobile */
+    }
+
+    .hero-logo, .collapse-text {
+        animation-range: 0px 300px; 
+    }
+
+    @keyframes logoShrink {
+        /* calc(-50vh + 35px) anchors the logo exactly in the middle of the 70px mobile bar */
+        to { transform: translateY(calc(-50vh + 35px)) scale(0.35); }
+    }
     
-    .hero-logo {
-        animation: mobileLogoGlide linear both;
-        animation-timeline: scroll();
-        animation-range: 0% 20%;
+    .content-section {
+        gap: 10vh; 
+        padding-bottom: 10vh;
     }
-
-    @keyframes mobileLogoGlide {
-        from { transform: translateY(0) scale(1); }
-        to { transform: translateY(-36vh) scale(0.4); } 
-    }
-
-    .slogan-reveal { --target-y: -78vh; animation-range: 5% 35%; }
-    .para-reveal { --target-y: -63vh; animation-range: 15% 45%; }
-    .blocks-reveal { --target-y: -37vh; animation-range: 25% 75%; }
 
     .body-slogan {
         font-size: 0.95rem !important;
         padding: 0 25px;
         line-height: 1.3;
-        text-align: center;
         width: 100%;
     }
 
@@ -277,7 +313,6 @@ body, .font-helvetica {
         font-size: 0.8rem !important;
         padding: 0 35px;
         line-height: 1.5;
-        text-align: center;
     }
 
     .t-grid-container { max-width: 75%; gap: 12px; }
@@ -286,22 +321,12 @@ body, .font-helvetica {
     .t-row-bottom .box-card { width: 100% !important; }
     .box-card { height: 30px; border-radius: 10px; }
 
-    /* Adjust footer for mobile stacking */
-    .footer-inner {
+    .footer-bottom {
         flex-direction: column;
+        align-items: flex-start;
         gap: 12px;
-        text-align: center;
     }
     
-    .footer-right {
-        justify-content: center;
-        gap: 5px; /* Adds breathing room when links wrap to a second line */
-    }
-
-    .footer-system {
-        height: auto;
-        padding: 15px 0;
-    }
-    
-    .content-wrapper { height: 180vh !important; }
+    .footer-right { justify-content: flex-start; }
+    .footer-system { padding: 20px 0; }
 }
