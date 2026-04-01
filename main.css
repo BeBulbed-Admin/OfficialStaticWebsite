@@ -315,7 +315,7 @@ body, .font-helvetica {
     }
 
     .para-reveal {
-        --target-y: -60vh; 
+        --target-y: -70vh; 
         animation-range: 15% 45%;
     }
 
