@@ -140,7 +140,7 @@ body, .font-helvetica {
 }
 
 .slogan-reveal {
-    --target-y: -66vh; 
+    --target-y: -67vh; 
     animation-range: 20% 55%;
 }
 
@@ -309,7 +309,6 @@ body, .font-helvetica {
         to { transform: translateY(-36vh) scale(0.4); } 
     }
 
-    /* 2. Vertical Spacing - Adjusted for the taller button stack */
     .slogan-reveal {
         --target-y: -75vh; 
         animation-range: 5% 35%;
@@ -321,7 +320,6 @@ body, .font-helvetica {
     }
 
     .blocks-reveal {
-        /* Pushed slightly lower than before because the list is long */
         --target-y: -45vh; 
         animation-range: 25% 75%;
     }
