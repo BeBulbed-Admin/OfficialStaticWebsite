@@ -310,17 +310,17 @@ body, .font-helvetica {
     }
 
     .slogan-reveal {
-        --target-y: -80vh; 
+        --target-y: -70vh; 
         animation-range: 5% 35%;
     }
 
     .para-reveal {
-        --target-y: -70vh; 
+        --target-y: -50vh; 
         animation-range: 15% 45%;
     }
 
     .blocks-reveal {
-        --target-y: -50vh; 
+        --target-y: -30vh; 
         animation-range: 25% 75%;
     }
 
@@ -337,30 +337,29 @@ body, .font-helvetica {
         line-height: 1.5;
     }
 
-    /* 4. THE COLUMN FIX: Stacking all four buttons */
     .t-grid-container {
-        max-width: 75%; /* Narrower width looks better for a list */
+        max-width: 75%; 
         gap: 12px;
     }
 
     .t-row-top {
         display: flex;
-        flex-direction: column; /* Stacks Spark, Glow, Blast */
+        flex-direction: column; 
         gap: 12px;
     }
 
     .t-row-bottom {
         width: 100%;
         display: flex;
-        flex-direction: column; /* Stacks Social */
+        flex-direction: column; 
     }
 
     .t-row-bottom .box-card {
-        width: 100% !important; /* Makes Social match the others */
+        width: 100% !important; /
     }
 
     .box-card {
-        height: 50px; /* Slightly taller buttons for easier tapping */
+        height: 30px; 
         border-radius: 10px;
     }
 
