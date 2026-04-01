@@ -322,7 +322,7 @@ body, .font-helvetica {
 
 .news-card:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-3px); }
 
-/* --- 12. ADVANCED DOCKING LOGIC (SUBPAGES) --- */
+/* --- 12. ADVANCED DOCKING MECHANICS --- */
 
 .subpage-nav {
     position: fixed;
@@ -330,32 +330,36 @@ body, .font-helvetica {
     left: 0;
     width: 100%;
     height: 70px;
-    background: rgba(13, 13, 13, 0.85) !important;
+    background: rgba(13, 13, 13, 0.9) !important;
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    z-index: 1000; /* Nav sits high */
+    z-index: 2000; /* Keeps nav above all scrolling content */
     transform: translateY(0) !important;
     animation: none !important;
 }
 
+/* This is the track that moves everything as one unit */
 .nav-dock-container {
     position: absolute;
     left: 50%;
     top: 0;
     height: 100%;
-    transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: translateX(-50%); /* Start perfectly centered */
     
-    /* Logo slides left only as title docks */
-    animation: shiftLogoLeft linear both;
+    /* ANIMATION: Slides the entire unit left as you scroll */
+    animation: shiftDockLeft linear both;
     animation-timeline: scroll();
-    animation-range: 120px 200px;
+    animation-range: 50px 180px;
 }
 
-@keyframes shiftLogoLeft {
-    to { transform: translateX(-85%); }
+@keyframes shiftDockLeft {
+    /* We slide left by about 65px (adjust as needed) 
+       to center the 'BB Logo + Newsroom' combo as a whole 
+    */
+    to { transform: translateX(-85%); } 
 }
 
 .nav-logo-link {
@@ -364,24 +368,23 @@ body, .font-helvetica {
     color: #ffffff !important;
     font-size: 2.2rem !important;
     text-decoration: none !important;
+    transition: transform 0.2s ease;
 }
 
 .nav-dock-title {
     font-size: 1.3rem;
     color: var(--zinc-text);
     white-space: nowrap;
-    position: absolute;
-    left: 100%; 
-    margin-left: 20px;
-    opacity: 0; /* Hidden 'ghost' title */
+    margin-left: 18px; /* Space between logo and text */
+    opacity: 0;
     
-    /* Ghost becomes visible as real title arrives */
-    animation: revealGhostTitle linear both;
+    /* ANIMATION: Becomes visible only when the docking is complete */
+    animation: revealDockTitle linear both;
     animation-timeline: scroll();
-    animation-range: 160px 200px;
+    animation-range: 150px 200px;
 }
 
-@keyframes revealGhostTitle {
+@keyframes revealDockTitle {
     to { opacity: 1; }
 }
 
@@ -391,11 +394,11 @@ body, .font-helvetica {
     margin-bottom: 40px;
     color: #fff;
     text-align: center;
-    z-index: 1100; /* ABOVE the nav bar */
+    z-index: 2100; /* Sits ABOVE the nav bar during the flight */
     position: relative;
-    pointer-events: none; /* Can't click through it to hit nav while moving */
+    pointer-events: none;
     
-    /* THE DOCKING: Travels UP over the nav, shrinks, and vanishes at the landing spot */
+    /* ANIMATION: Flies UP into the header bar and shrinks */
     animation: physicalDocking linear both;
     animation-timeline: scroll();
     animation-range: 0px 200px;
@@ -403,16 +406,23 @@ body, .font-helvetica {
 
 @keyframes physicalDocking {
     0% { transform: translateY(0) scale(1); opacity: 1; }
-    80% { opacity: 1; } /* Stay bright until the very last moment */
+    90% { opacity: 1; } /* Stay bright until the end */
     100% { 
+        /* Physically land in the header spot */
         transform: translateY(-132px) scale(0.35); 
-        opacity: 0; /* Vanishes exactly as it hits the nav-dock-title spot */
+        opacity: 0; 
     }
 }
 
+/* --- MOBILE TWEAKS --- */
 @media (max-width: 768px) {
     .nav-logo-link { font-size: 1.8rem !important; }
     .nav-dock-title { font-size: 1rem; margin-left: 12px; }
+    
+    @keyframes shiftDockLeft {
+        to { transform: translateX(-70%); }
+    }
+    
     @keyframes physicalDocking {
         to { transform: translateY(-138px) scale(0.4); opacity: 0; }
     }
