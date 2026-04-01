@@ -315,12 +315,12 @@ body, .font-helvetica {
     }
 
     .para-reveal {
-        --target-y: -67.5vh; 
+        --target-y: -70vh; 
         animation-range: 15% 45%;
     }
 
     .blocks-reveal {
-        --target-y: -40vh; 
+        --target-y: -37vh; 
         animation-range: 25% 75%;
     }
 
