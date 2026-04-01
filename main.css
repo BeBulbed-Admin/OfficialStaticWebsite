@@ -322,7 +322,7 @@ body, .font-helvetica {
 
 .news-card:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-3px); }
 
-/* --- 12. THE MECHANICAL 'CAR PARKING' HEADER --- */
+/* --- 12. THE CAR PARKING HEADER (MECHANICAL) --- */
 
 .subpage-nav {
     position: fixed;
@@ -333,85 +333,92 @@ body, .font-helvetica {
     background: rgba(13, 13, 13, 0.9) !important;
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    z-index: 1000; /* Nav stays at base subpage level */
+    z-index: 2000;
     transform: translateY(0) !important;
     animation: none !important;
 }
 
-/* THE PARKING SPOT */
-.nav-dock-container {
+.nav-dock-wrapper {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    top: 0;
+    height: 100%;
+    transform: translateX(-50%); /* Centered group */
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
 }
 
 .nav-logo-link {
     display: flex !important;
-    color: #fff !important;
+    align-items: center !important;
+    color: #ffffff !important;
     font-size: 2.2rem !important;
     text-decoration: none !important;
-    flex-shrink: 0;
+    
+    /* LOGO PHYSICS: Slides left only to make room for the 'parked' car */
+    animation: openParkingSpace linear both;
+    animation-timeline: scroll();
+    animation-range: 40px 180px;
+}
+
+@keyframes openParkingSpace {
+    /* Moves the logo left by about 75px */
+    to { transform: translateX(-35px); } 
 }
 
 .nav-park-text {
     font-size: 1.3rem;
     color: var(--zinc-text);
     white-space: nowrap;
-    overflow: hidden;
-    width: 0px; 
+    position: absolute;
+    left: 50%; /* Start relative to center */
+    
+    /* THE PARKING PHYSICS: 
+       The text starts exactly where the 'h1' is on the page, 
+       then drives UP and slides RIGHT into its spot. */
+    transform: translate(-50%, 15vh) scale(2.5);
     opacity: 0;
-    margin-left: 0px;
 
-    /* ANIMATION: Expands to create the tight parking space */
-    animation: expandParkingSpace linear both;
+    animation: driveToPark linear both;
     animation-timeline: scroll();
-    animation-range: 60px 160px;
+    animation-range: 0px 180px;
 }
 
-@keyframes expandParkingSpace {
-    to { 
-        width: 110px; 
+@keyframes driveToPark {
+    0% { opacity: 0; }
+    20% { opacity: 1; } /* Becomes visible as it leaves the page title spot */
+    100% { 
+        /* Parks at 50px right of the logo, back to normal size and height */
+        transform: translate(35px, 0) scale(1); 
         opacity: 1; 
-        margin-left: 10px; /* TIGHTER GAP: Reduced from 15px to 10px */
     }
 }
 
 .subpage-title {
     font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
     color: #fff;
     text-align: center;
     position: relative;
-    margin-bottom: 40px;
-    z-index: 2000; /* Flying ABOVE the nav bar */
-    pointer-events: none;
+    z-index: 500; /* Stays below the nav bar */
     
-    /* ANIMATION: Perfect landing to prevent 'shattering' */
-    animation: parkTheTitle linear both;
+    /* Simply fades out so the 'driver' in the nav takes the eye's attention */
+    animation: fadeForParking linear both;
     animation-timeline: scroll();
-    animation-range: 0px 160px;
+    animation-range: 0px 60px;
 }
 
-@keyframes parkTheTitle {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    /* LANDING GEAR: Adjusted translateY to -118px and scale to 0.4 
-       to align perfectly with the header text size and position */
-    100% { 
-        transform: translateY(-118px) scale(0.4); 
-        opacity: 0; 
-    }
+@keyframes fadeForParking {
+    to { opacity: 0; visibility: hidden; }
 }
 
-/* Mobile Tuning */
+/* Mobile Tweak for the Parking spot */
 @media (max-width: 768px) {
     .nav-logo-link { font-size: 1.8rem !important; }
-    @keyframes expandParkingSpace {
-        to { width: 85px; opacity: 1; margin-left: 8px; }
-    }
-    @keyframes parkTheTitle {
-        to { transform: translateY(-122px) scale(0.4); opacity: 0; }
+    @keyframes openParkingSpace { to { transform: translateX(-55px); } }
+    @keyframes driveToPark {
+        100% { transform: translate(25px, 0) scale(1); opacity: 1; }
     }
 }
