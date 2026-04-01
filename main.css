@@ -333,41 +333,43 @@ body, .font-helvetica {
     background: rgba(13, 13, 13, 0.9) !important;
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    z-index: 1000; 
+    z-index: 1000; /* Nav sits at the base */
     transform: translateY(0) !important;
     animation: none !important;
 }
 
-/* THE CONTAINER (Locked to Center) */
+/* THE PARKING GARAGE (Centered Container) */
 .nav-dock-wrapper {
     position: absolute;
     left: 50%;
     top: 0;
     height: 100%;
     transform: translateX(-50%);
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .nav-logo-link {
     position: absolute;
     display: flex !important;
-    color: #fff !important;
+    color: #ffffff !important;
     font-size: 2.2rem !important;
     text-decoration: none !important;
-    left: 50%;
-    transform: translateX(-50%); /* Starts dead center */
     
-    /* LOGO PHYSICS: Only the logo moves left */
+    /* LOGO START: Dead Center */
+    left: 50%;
+    transform: translateX(-50%); 
+    
+    /* LOGO MOVEMENT: Slides left to 'open the parking space' */
     animation: shiftLogoLeft linear both;
     animation-timeline: scroll();
-    animation-range: 40px 150px;
+    animation-range: 50px 250px; /* Slower, smoother range */
 }
 
 @keyframes shiftLogoLeft {
-    /* Moves left just enough to sit to the left of the centered title */
+    /* Moves the logo left exactly enough to sit beside the title */
     to { transform: translateX(-140%); } 
 }
 
@@ -376,17 +378,19 @@ body, .font-helvetica {
     font-size: 1.3rem;
     color: var(--zinc-text);
     white-space: nowrap;
+    
+    /* TITLE START: Dead Center */
     left: 50%;
-    transform: translateX(-50%); /* STAYS CENTERED */
+    transform: translateX(-50%); 
     opacity: 0;
 
-    /* ANIMATION: Fades in at the top center */
-    animation: revealCenterTitle linear both;
+    /* REVEAL: Fades in exactly when the big title 'lands' */
+    animation: revealDockedTitle linear both;
     animation-timeline: scroll();
-    animation-range: 100px 160px;
+    animation-range: 180px 250px;
 }
 
-@keyframes revealCenterTitle {
+@keyframes revealDockedTitle {
     to { opacity: 1; }
 }
 
@@ -396,29 +400,31 @@ body, .font-helvetica {
     text-align: center;
     position: relative;
     margin-bottom: 40px;
-    z-index: 2000; /* Over the nav bar */
+    
+    /* VISIBILITY: High z-index so it stays visible over the nav bar */
+    z-index: 2000; 
     pointer-events: none;
     
-    /* ANIMATION: Shrinks and moves up center-line only */
-    animation: shrinkToCenter linear both;
+    /* THE LANDING: Rises center-line, shrinks, and vanishes as it docks */
+    animation: parkTheTitle linear both;
     animation-timeline: scroll();
-    animation-range: 0px 160px;
+    animation-range: 0px 250px; /* Matched range for perfect sync */
 }
 
-@keyframes shrinkToCenter {
+@keyframes parkTheTitle {
     0% { transform: translateY(0) scale(1); opacity: 1; }
-    /* Scales down and hits the nav bar height precisely */
+    /* The Land: We use -122px to drop it perfectly in the center of the 70px bar */
     100% { 
-        transform: translateY(-118px) scale(0.4); 
+        transform: translateY(-122px) scale(0.38); 
         opacity: 0; 
     }
 }
 
-/* Mobile Adjustments */
+/* Mobile Tuning */
 @media (max-width: 768px) {
     .nav-logo-link { font-size: 1.8rem !important; }
     @keyframes shiftLogoLeft { to { transform: translateX(-120%); } }
-    @keyframes shrinkToCenter {
-        to { transform: translateY(-122px) scale(0.4); opacity: 0; }
+    @keyframes parkTheTitle {
+        to { transform: translateY(-128px) scale(0.4); opacity: 0; }
     }
 }
