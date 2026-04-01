@@ -25,7 +25,7 @@ body, .font-helvetica {
 .font-baumans { font-family: 'Baumans', cursive; }
 .flip-b { display: inline-block; transform: scaleX(-1); }
 
-/* --- 2. TOP MASKS & BARS (HOMEPAGE) --- */
+/* --- 2. HOMEPAGE HERO ELEMENTS --- */
 .top-fade-mask {
     position: fixed;
     top: 0;
@@ -43,7 +43,7 @@ body, .font-helvetica {
     left: 0;
     width: 100%;
     height: 80px;
-    background: var(--bg-alt); 
+    background: var(--bg-alt);
     border-bottom: 1px solid var(--border);
     z-index: 950;
     pointer-events: none;
@@ -57,7 +57,6 @@ body, .font-helvetica {
     to { opacity: 1; }
 }
 
-/* --- 3. SHRINKING HERO LOGO & TEXT COLLAPSE --- */
 .logo-hero-container {
     position: fixed; 
     top: 0;
@@ -96,7 +95,7 @@ body, .font-helvetica {
     100% { font-size: 0px; opacity: 0; }
 }
 
-/* --- 4. NATURAL REVEAL SYSTEM (CONTENT) --- */
+/* --- 4. NATURAL REVEAL SYSTEM --- */
 .content-section {
     width: 100%;
     display: flex;
@@ -140,7 +139,7 @@ body, .font-helvetica {
     text-align: center;
 }
 
-/* --- 5. GRID BUTTONS (T-SHAPE) --- */
+/* --- 5. GRID BUTTONS --- */
 .t-grid-container {
     width: 100%;
     max-width: 850px; 
@@ -291,10 +290,9 @@ body, .font-helvetica {
     .footer-system { padding: 12px 0; }
 }
 
-/* --- 9. SUBPAGE BASE STYLES --- */
+/* --- 9. SUBPAGE CONTAINER --- */
 .subpage-container {
     position: relative;
-    z-index: 100;
     padding-top: 15vh;
     min-height: 80vh;
     display: flex;
@@ -389,31 +387,40 @@ textarea.form-field { min-height: 150px; resize: vertical; }
 .news-headline { font-size: clamp(1.2rem, 3vw, 1.5rem); line-height: 1.4; margin: 8px 0; }
 .news-excerpt { font-size: 0.95rem; color: var(--zinc-text); line-height: 1.6; }
 
-/* --- 11. SEAMLESS DOCKING HEADER (SUBPAGES) --- */
+/* --- 12. DYNAMIC DOCKING PHYSICS --- */
+
 .subpage-nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 70px;
-    background: rgba(13, 13, 13, 0.8) !important; 
+    background: rgba(13, 13, 13, 0.85) !important; 
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
     transform: translateY(0) !important;
     animation: none !important;
-    animation-timeline: auto !important;
 }
 
-.nav-center-dynamic {
+.nav-dock-container {
     position: absolute;
     left: 50%;
     top: 0;
     height: 100%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); /* Start Dead Center */
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    /* PHYSICS: This container slides left to make room */
+    animation: slideNavLeft linear both;
+    animation-timeline: scroll();
+    animation-range: 60px 180px; 
+}
+
+@keyframes slideNavLeft {
+    to { transform: translateX(-80%); } /* Slides left */
 }
 
 .nav-logo-link {
@@ -424,20 +431,25 @@ textarea.form-field { min-height: 150px; resize: vertical; }
     text-decoration: none !important;
 }
 
-.nav-dynamic-title {
+.nav-dock-title {
     font-size: 1.3rem;
     color: var(--zinc-text);
     white-space: nowrap;
-    overflow: hidden;
-    max-width: 0px;
+    position: absolute;
+    left: 100%; /* Sits to the right of the BB logo */
+    margin-left: 20px;
+    
+    /* PHYSICS: Travels UP into the header bar */
+    transform: translateY(100px); 
     opacity: 0;
-    animation: revealDockedTitle linear both;
+    
+    animation: dockIntoHeader linear both;
     animation-timeline: scroll();
-    animation-range: 100px 180px; 
+    animation-range: 40px 180px; 
 }
 
-@keyframes revealDockedTitle {
-    to { max-width: 200px; opacity: 1; margin-left: 15px; }
+@keyframes dockIntoHeader {
+    to { transform: translateY(0); opacity: 1; }
 }
 
 .subpage-title {
@@ -447,19 +459,21 @@ textarea.form-field { min-height: 150px; resize: vertical; }
     color: #fff;
     text-align: center;
     z-index: 500;
-    position: relative;
-    animation: dockTitleUp linear both;
+    
+    /* PHYSICS: The main page title rises and fades as it 'transfers' */
+    animation: transferTitleUp linear both;
     animation-timeline: scroll();
     animation-range: 0px 180px;
 }
 
-@keyframes dockTitleUp {
+@keyframes transferTitleUp {
     from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-120px); opacity: 0; }
+    to { transform: translateY(-100px); opacity: 0; }
 }
 
+/* Mobile Tweak */
 @media (max-width: 768px) {
+    @keyframes slideNavLeft { to { transform: translateX(-70%); } }
     .nav-logo-link { font-size: 1.8rem !important; }
-    .nav-dynamic-title { font-size: 1rem; }
-    .subpage-title { animation-range: 0px 120px; }
+    .nav-dock-title { font-size: 1rem; margin-left: 12px; }
 }
