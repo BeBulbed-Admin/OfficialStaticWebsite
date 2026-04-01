@@ -25,7 +25,7 @@ body, .font-helvetica {
 .font-baumans { font-family: 'Baumans', cursive; }
 .flip-b { display: inline-block; transform: scaleX(-1); }
 
-/* --- 2. TOP MASKS & BARS --- */
+/* --- 2. TOP MASKS & BARS (HOMEPAGE) --- */
 .top-fade-mask {
     position: fixed;
     top: 0;
@@ -43,13 +43,13 @@ body, .font-helvetica {
     left: 0;
     width: 100%;
     height: 80px;
-    background: var(--bg-alt); /* Matches footer */
-    border-bottom: 1px solid var(--border); /* Matches footer line */
+    background: var(--bg-alt); 
+    border-bottom: 1px solid var(--border);
     z-index: 950;
     pointer-events: none;
     animation: navBarReveal linear both;
     animation-timeline: scroll();
-    animation-range: 200px 400px; /* Fades in smoothly */
+    animation-range: 200px 400px;
 }
 
 @keyframes navBarReveal {
@@ -88,21 +88,15 @@ body, .font-helvetica {
     display: inline-block;
     animation: textCollapse linear both;
     animation-timeline: scroll();
-    animation-range: 0px 400px; /* Matches the logo shrink timeline perfectly */
+    animation-range: 0px 400px; 
 }
 
 @keyframes textCollapse {
-    0% { 
-        font-size: inherit; 
-        opacity: 1; 
-    }
-    100% { 
-        font-size: 0px; 
-        opacity: 0; 
-    }
+    0% { font-size: inherit; opacity: 1; }
+    100% { font-size: 0px; opacity: 0; }
 }
 
-/* --- 4. NATURAL REVEAL SYSTEM --- */
+/* --- 4. NATURAL REVEAL SYSTEM (CONTENT) --- */
 .content-section {
     width: 100%;
     display: flex;
@@ -146,7 +140,7 @@ body, .font-helvetica {
     text-align: center;
 }
 
-/* --- 5. EXPANDED T-SHAPE CONTENT BLOCKS --- */
+/* --- 5. GRID BUTTONS (T-SHAPE) --- */
 .t-grid-container {
     width: 100%;
     max-width: 850px; 
@@ -193,11 +187,10 @@ body, .font-helvetica {
     margin: 0 auto;
 }
 
-/* The Dropdown Accordion */
 .footer-directory {
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    padding-bottom: 8px;   /* Shrunk from 15px */
-    margin-bottom: 8px;    /* Shrunk from 15px */
+    padding-bottom: 8px;
+    margin-bottom: 8px;
 }
 
 .apple-accordion { width: 100%; }
@@ -231,7 +224,6 @@ body, .font-helvetica {
     gap: 8px;              
 }
 
-/* Bottom Legal Section */
 .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -282,62 +274,28 @@ body, .font-helvetica {
 
 /* --- 8. MOBILE REFINEMENT --- */
 @media (max-width: 768px) {
-
-    .scrolled-nav-bg {
-        height: 70px; /* Slimmer top bar for mobile */
-    }
-
-    .hero-logo, .collapse-text {
-        animation-range: 0px 300px; 
-    }
-
+    .scrolled-nav-bg { height: 70px; }
+    .hero-logo, .collapse-text { animation-range: 0px 300px; }
     @keyframes logoShrink {
-        /* calc(-50vh + 35px) anchors the logo exactly in the middle of the 70px mobile bar */
         to { transform: translateY(calc(-50vh + 35px)) scale(0.45); }
     }
-    
-    .content-section {
-        gap: 10vh; 
-        padding-bottom: 10vh;
-    }
-
-    .body-slogan {
-        font-size: 1.25rem !important;
-        padding: 0 25px;
-        line-height: 1.3;
-        width: 100%;
-    }
-
-    .body-para {
-        font-size: 1rem !important;
-        padding: 0 35px;
-        line-height: 1.5;
-    }
-
+    .content-section { gap: 10vh; padding-bottom: 10vh; }
+    .body-slogan { font-size: 1.25rem !important; padding: 0 25px; line-height: 1.3; width: 100%; }
+    .body-para { font-size: 1rem !important; padding: 0 35px; line-height: 1.5; }
     .t-grid-container { max-width: 50%; gap: 12px; }    
     .t-row-top { display: flex; flex-direction: column; gap: 12px; }    
     .t-row-bottom { width: 100%; display: flex; flex-direction: column; }    
-    .box-card { 
-        width: 100% !important; 
-        height: 40px; 
-        border-radius: 10px; 
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-    
+    .box-card { width: 100% !important; height: 40px; border-radius: 10px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
     .footer-right { justify-content: flex-start; }
     .footer-system { padding: 12px 0; }
 }
 
-/* --- 10. SUBPAGE STYLES (News, Contact, Legal) --- */
+/* --- 9. SUBPAGE BASE STYLES --- */
 .subpage-container {
     position: relative;
-    z-index: 400;
-    padding-top: 15vh; /* Pushes content below the top fade mask */
+    z-index: 100;
+    padding-top: 15vh;
     min-height: 80vh;
     display: flex;
     flex-direction: column;
@@ -354,16 +312,8 @@ body, .font-helvetica {
     font-size: 0.95rem;
 }
 
-.text-content-block h3 {
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin: 2.5rem 0 1rem 0;
-}
-
-.text-content-block p {
-    margin-bottom: 1.5rem;
-}
+.text-content-block h3 { color: #fff; font-size: 1.2rem; margin: 2.5rem 0 1rem 0; }
+.text-content-block p { margin-bottom: 1.5rem; }
 
 /* Contact Form */
 .contact-form-wrapper {
@@ -387,20 +337,10 @@ body, .font-helvetica {
     transition: all var(--transition-speed) ease;
 }
 
-.form-field::placeholder {
-    color: rgba(255, 255, 255, 0.3);
-}
+.form-field::placeholder { color: rgba(255, 255, 255, 0.3); }
+.form-field:focus { outline: none; border-color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.05); }
 
-.form-field:focus {
-    outline: none;
-    border-color: rgba(255, 255, 255, 0.4);
-    background: rgba(255, 255, 255, 0.05);
-}
-
-textarea.form-field {
-    min-height: 150px;
-    resize: vertical;
-}
+textarea.form-field { min-height: 150px; resize: vertical; }
 
 .btn-submit {
     background: #fff;
@@ -409,18 +349,14 @@ textarea.form-field {
     padding: 16px;
     border-radius: 12px;
     font-weight: 600;
-    font-size: 0.95rem;
     cursor: pointer;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: all 0.2s ease;
     margin-top: 10px;
 }
 
-.btn-submit:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-}
+.btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }
 
-/* --- 11. NEWSROOM STYLES --- */
+/* --- 10. NEWSROOM STYLES --- */
 .news-grid {
     width: 100%;
     max-width: 850px;
@@ -435,19 +371,12 @@ textarea.form-field {
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
     text-decoration: none;
     color: #fff;
-    transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all var(--transition-speed) ease;
 }
 
-.news-card:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-3px);
-}
+.news-card:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-3px); }
 
 .news-date {
     font-size: 0.8rem;
@@ -457,35 +386,20 @@ textarea.form-field {
     font-weight: 500;
 }
 
-.news-headline {
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
-}
+.news-headline { font-size: clamp(1.2rem, 3vw, 1.5rem); line-height: 1.4; margin: 8px 0; }
+.news-excerpt { font-size: 0.95rem; color: var(--zinc-text); line-height: 1.6; }
 
-.news-excerpt {
-    font-size: 0.95rem;
-    color: var(--zinc-text);
-    line-height: 1.6;
-    font-weight: 300;
-}
-
-/* --- 12. DYNAMIC SUBPAGE HEADER FIX --- */
-
-/* Permanently lock the nav bar to the top of subpages */
+/* --- 11. SEAMLESS DOCKING HEADER (SUBPAGES) --- */
 .subpage-nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 70px;
-    background: rgba(17, 17, 17, 0.9) !important; 
+    background: rgba(13, 13, 13, 0.8) !important; 
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
-    
-    /* OVERRIDE HOMEPAGE HIDE LOGIC */
     transform: translateY(0) !important;
     animation: none !important;
     animation-timeline: auto !important;
@@ -515,24 +429,15 @@ textarea.form-field {
     color: var(--zinc-text);
     white-space: nowrap;
     overflow: hidden;
-    
-    /* ANIMATION: Expand Newsroom and Slide BB Left */
-    animation: expandNavTitle linear both;
+    max-width: 0px;
+    opacity: 0;
+    animation: revealDockedTitle linear both;
     animation-timeline: scroll();
-    animation-range: 50px 180px; 
+    animation-range: 100px 180px; 
 }
 
-@keyframes expandNavTitle {
-    0% { 
-        max-width: 0px; 
-        opacity: 0; 
-        margin-left: 0px; 
-    }
-    100% { 
-        max-width: 200px; 
-        opacity: 1; 
-        margin-left: 15px; 
-    }
+@keyframes revealDockedTitle {
+    to { max-width: 200px; opacity: 1; margin-left: 15px; }
 }
 
 .subpage-title {
@@ -541,21 +446,20 @@ textarea.form-field {
     margin-bottom: 40px;
     color: #fff;
     text-align: center;
-    
-    /* Fade out main title as you scroll */
-    animation: fadeOutMainTitle linear both;
+    z-index: 500;
+    position: relative;
+    animation: dockTitleUp linear both;
     animation-timeline: scroll();
-    animation-range: 0px 150px; 
+    animation-range: 0px 180px;
 }
 
-@keyframes fadeOutMainTitle {
-    to { 
-        opacity: 0; 
-        transform: translateY(-20px); 
-    }
+@keyframes dockTitleUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-120px); opacity: 0; }
 }
 
 @media (max-width: 768px) {
     .nav-logo-link { font-size: 1.8rem !important; }
     .nav-dynamic-title { font-size: 1rem; }
+    .subpage-title { animation-range: 0px 120px; }
 }
