@@ -364,7 +364,7 @@ body, .font-helvetica {
 
 @keyframes openParkingSpace {
     /* Moves the logo left by about 75px */
-    to { transform: translateX(-35px); } 
+    to { transform: translateX(-25px); } 
 }
 
 .nav-park-text {
