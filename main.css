@@ -310,12 +310,12 @@ body, .font-helvetica {
     }
 
     .slogan-reveal {
-        --target-y: -80vh; 
+        --target-y: -88vh; 
         animation-range: 5% 35%;
     }
 
     .para-reveal {
-        --target-y: -65vh; 
+        --target-y: -63vh; 
         animation-range: 15% 45%;
     }
 
