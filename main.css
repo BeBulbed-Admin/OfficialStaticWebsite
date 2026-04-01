@@ -322,7 +322,7 @@ body, .font-helvetica {
 
 .news-card:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-3px); }
 
-/* --- 12. MECHANICAL DOCKING HEADER --- */
+/* --- 12. THE CAR PARKING HEADER (MECHANICAL) --- */
 
 .subpage-nav {
     position: fixed;
@@ -338,17 +338,15 @@ body, .font-helvetica {
     animation: none !important;
 }
 
-/* This container holds both BB and the Title as one unit */
-.nav-dock-container {
+.nav-dock-wrapper {
     position: absolute;
     left: 50%;
     top: 0;
     height: 100%;
-    transform: translateX(-50%); /* Keeps the GROUP centered */
+    transform: translateX(-50%); /* Centered group */
     display: flex;
     align-items: center;
     justify-content: center;
-    pointer-events: none;
 }
 
 .nav-logo-link {
@@ -357,32 +355,43 @@ body, .font-helvetica {
     color: #ffffff !important;
     font-size: 2.2rem !important;
     text-decoration: none !important;
-    pointer-events: auto;
+    
+    /* LOGO PHYSICS: Slides left only to make room for the 'parked' car */
+    animation: openParkingSpace linear both;
+    animation-timeline: scroll();
+    animation-range: 40px 180px;
 }
 
-/* The header text that 'grows' next to the logo */
-.nav-dock-title {
+@keyframes openParkingSpace {
+    /* Moves the logo left by about 75px */
+    to { transform: translateX(-75px); } 
+}
+
+.nav-park-text {
     font-size: 1.3rem;
     color: var(--zinc-text);
     white-space: nowrap;
-    overflow: hidden;
+    position: absolute;
+    left: 50%; /* Start relative to center */
     
-    /* MECHANICAL FIX: Start with 0 width so logo is dead center. 
-       As it grows, it pushes the logo to the left. */
-    width: 0px; 
+    /* THE PARKING PHYSICS: 
+       The text starts exactly where the 'h1' is on the page, 
+       then drives UP and slides RIGHT into its spot. */
+    transform: translate(-50%, 15vh) scale(2.5);
     opacity: 0;
-    margin-left: 0px;
 
-    animation: expandAndPush linear both;
+    animation: driveToPark linear both;
     animation-timeline: scroll();
-    animation-range: 80px 200px;
+    animation-range: 0px 180px;
 }
 
-@keyframes expandAndPush {
-    to { 
-        width: 110px; /* Adjust this number to fit the word exactly */
+@keyframes driveToPark {
+    0% { opacity: 0; }
+    20% { opacity: 1; } /* Becomes visible as it leaves the page title spot */
+    100% { 
+        /* Parks at 50px right of the logo, back to normal size and height */
+        transform: translate(35px, 0) scale(1); 
         opacity: 1; 
-        margin-left: 20px; /* Creates the gap between BB and Newsroom */
     }
 }
 
@@ -392,25 +401,24 @@ body, .font-helvetica {
     margin-bottom: 40px;
     color: #fff;
     text-align: center;
-    z-index: 1500; 
     position: relative;
+    z-index: 500; /* Stays below the nav bar */
     
-    /* ANIMATION: Rises and fades just as the header word expands */
-    animation: transferTitleUp linear both;
+    /* Simply fades out so the 'driver' in the nav takes the eye's attention */
+    animation: fadeForParking linear both;
     animation-timeline: scroll();
-    animation-range: 0px 180px;
+    animation-range: 0px 60px;
 }
 
-@keyframes transferTitleUp {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-110px); opacity: 0; }
+@keyframes fadeForParking {
+    to { opacity: 0; visibility: hidden; }
 }
 
-/* Mobile Adjustment */
+/* Mobile Tweak for the Parking spot */
 @media (max-width: 768px) {
     .nav-logo-link { font-size: 1.8rem !important; }
-    .nav-dock-title { font-size: 1rem; }
-    @keyframes expandAndPush {
-        to { width: 85px; opacity: 1; margin-left: 12px; }
+    @keyframes openParkingSpace { to { transform: translateX(-55px); } }
+    @keyframes driveToPark {
+        100% { transform: translate(25px, 0) scale(1); opacity: 1; }
     }
 }
