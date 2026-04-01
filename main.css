@@ -1,0 +1,296 @@
+/* --- 1. GLOBAL SETTINGS & VARIABLES --- */
+:root {
+    --bg: #0d0d0d;
+    --bg-alt: #111111; 
+    --border: rgba(255, 255, 255, 0.14); 
+    --zinc-text: #a1a1a1;
+    --nav-height: 85px;
+    --transition-speed: 0.4s;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    cursor: default; 
+}
+
+body, .font-helvetica {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+.font-baumans { font-family: 'Baumans', cursive; }
+.flip-b { display: inline-block; transform: scaleX(-1); }
+
+/* --- 2. FALLING NAVIGATION --- */
+.sticky-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background: rgba(17, 17, 17, 0.85); 
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    transform: translateY(-100%);
+    animation: navFall linear both;
+    animation-timeline: scroll();
+    animation-range: 10% 25%;
+}
+
+@keyframes navFall {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+.nav-inner {
+    width: 92%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo-left {
+    font-size: 2.2rem;
+    color: #fff;
+    letter-spacing: -0.05em;
+    font-weight: 500;
+}
+
+.nav-right {
+    display: flex;
+    gap: 45px;
+    align-items: center;
+}
+
+.nav-link {
+    font-size: 14px;
+    color: var(--zinc-text);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    font-weight: 400;
+    transition: color var(--transition-speed) ease;
+}
+
+.nav-link:hover { color: #fff; }
+
+/* --- 3. HERO NAME GLIDE --- */
+.logo-hero-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    pointer-events: none;
+}
+
+.hero-logo {
+    font-size: clamp(4rem, 22vw, 13rem);
+    display: flex;
+    align-items: center;
+    will-change: transform;
+    animation: logoGlideUp linear both;
+    animation-timeline: scroll();
+    animation-range: 0% 45%;
+}
+
+@keyframes logoGlideUp {
+    from { transform: translateY(0) scale(1); }
+    to { transform: translateY(-30vh) scale(0.35); }
+}
+
+/* --- 4. THE SPLIT REVEAL SYSTEM --- */
+.reveal-container {
+    position: fixed;
+    top: 100vh;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 400;
+    padding: 0 20px;
+    will-change: transform, opacity;
+    animation: revealRise linear both;
+    animation-timeline: scroll();
+}
+
+@keyframes revealRise {
+    from { 
+        transform: translateY(0); 
+        opacity: 0; 
+        filter: blur(15px); 
+    }
+    to { 
+        transform: translateY(var(--target-y)); 
+        opacity: 1; 
+        filter: blur(0); 
+    }
+}
+
+/* --- 4. THE SPLIT REVEAL SYSTEM (ADJUSTED) --- */
+
+.slogan-reveal {
+    --target-y: -66vh; 
+    animation-range: 20% 55%;
+}
+
+.para-reveal {
+    --target-y: -60vh; 
+    animation-range: 25% 65%;
+}
+
+.blocks-reveal {
+    --target-y: -38vh; 
+    animation-range: 30% 75%;
+}
+
+.body-slogan {
+    font-size: 0.9rem; 
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--zinc-text); 
+    font-weight: 500;
+}
+
+.body-para {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem); 
+    color: var(--zinc-text);
+    line-height: 1.7; 
+    font-weight: 300;
+    max-width: 600px; 
+    text-align: center;
+}
+
+/* --- 5. EXPANDED T-SHAPE CONTENT BLOCKS --- */
+.t-grid-container {
+    width: 100%;
+    max-width: 850px; 
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+}
+
+.t-row-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Spark, Glow, Blast */
+    gap: 30px; 
+}
+
+.t-row-bottom {
+    display: flex;
+    justify-content: center;
+}
+
+.box-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    height: 58px;
+    width: 100%;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #fff;
+    transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.t-row-bottom .box-card {
+    width: 260px; /* Stem of the T */
+}
+
+.box-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+    border-radius: 14px;
+}
+
+.box-title {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+/* --- 6. FOOTER SYSTEM --- */
+.footer-system {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8vh;
+    border-top: 1px solid var(--border); 
+    background: var(--bg-alt); 
+    display: flex;
+    align-items: center;
+    z-index: 600;
+    opacity: 0;
+    animation: footerReveal linear both;
+    animation-timeline: scroll();
+    animation-range: 85% 100%;
+}
+
+@keyframes footerReveal {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.footer-inner {
+    width: 92%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-text, .footer-logo {
+    font-size: 11.5px;
+    color: var(--zinc-text);
+    font-weight: 400;
+}
+
+.footer-logo { font-size: 12.5px; margin: 0 -1px; }
+
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* --- 7. SCROLL PROMPT --- */
+.scroll-prompt {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    animation: bounce 2s infinite, arrowExit linear both;
+    animation-timeline: auto, scroll();
+    animation-range: 0s, 0% 10%;
+}
+
+@keyframes arrowExit {
+    to { opacity: 0; visibility: hidden; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, -8px); }
+}
+
+/* --- 8. DEPTH CONTROL --- */
+.content-wrapper { height: 230vh; }
