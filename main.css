@@ -294,8 +294,31 @@ body, .font-helvetica {
 /* --- 8. DEPTH CONTROL --- */
 .content-wrapper { height: 230vh; }
 
-/* --- 9. FINAL MOBILE REFINEMENT (CENTERED & COLUMN) --- */
+
+
+
+/* --- 9. FINAL MOBILE REFINEMENT (SHRUNK HEADER) --- */
 @media (max-width: 768px) {
+    
+    /* 1. Shrink the Sticky Nav links */
+    .nav-link {
+        font-size: 11px !important; /* Shrunk from 14px */
+        letter-spacing: 0.05em;
+    }
+
+    /* 2. Shrink the small 'BB' logo on the left */
+    .nav-logo-left {
+        font-size: 1.6rem !important; /* Shrunk from 2.2rem */
+    }
+
+    /* 3. Tighten the space in the header */
+    .nav-inner {
+        width: 90%;
+    }
+
+    .nav-right {
+        gap: 25px; /* Shrunk gap between Newsroom and About */
+    }
     
     /* 1. Logo Anchor */
     .hero-logo {
