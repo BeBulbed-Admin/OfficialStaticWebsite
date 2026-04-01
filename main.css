@@ -334,36 +334,6 @@ body, .font-helvetica {
 }
 
 /* --- 10. SUBPAGE STYLES (News, Contact, Legal) --- */
-
-/* Keeps the nav bar permanently visible on subpages */
-/* --- SUBPAGE NAVIGATION FIXES --- */
-.subpage-nav {
-    transform: translateY(0) !important;
-    animation: none !important;
-    background: var(--bg-alt);
-    height: 70px;
-}
-
-/* Forces the clickable logo to show up perfectly */
-a.nav-logo-left {
-    display: inline-flex;
-    align-items: center;
-    font-size: 2.2rem !important;
-    color: #fff !important; /* Overrides default browser link colors */
-    letter-spacing: -0.05em;
-    font-weight: 500;
-    text-decoration: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    a.nav-logo-left {
-        font-size: 1.8rem !important; /* Slightly smaller for mobile */
-    }
-}
-
 .subpage-container {
     position: relative;
     z-index: 400;
@@ -372,14 +342,6 @@ a.nav-logo-left {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.subpage-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    letter-spacing: -0.02em;
-    margin-bottom: 40px;
-    color: #fff;
-    text-align: center;
 }
 
 /* Legal & Text Content Pages */
@@ -509,37 +471,90 @@ textarea.form-field {
     font-weight: 300;
 }
 
-/* --- 12. SUBPAGE OVERRIDES (Fixes missing logo on Newsroom/Contact) --- */
+/* --- 12. SUBPAGE OVERRIDES & DYNAMIC HEADER --- */
 
-/* 1. Force the nav bar to stay locked at the top and kill scroll animations */
+/* Force the nav bar to stay locked at the top */
 .subpage-nav {
     transform: translateY(0) !important;
     animation: none !important;
-    animation-timeline: auto !important; /* Fixes browser bugs hiding content */
-    background: var(--bg-alt) !important;
+    animation-timeline: auto !important;
+    background: rgba(17, 17, 17, 0.85) !important; 
+    backdrop-filter: blur(20px);
+    height: 70px;
+    display: flex;
 }
 
-/* 2. Force the inner container to be fully visible */
-.subpage-nav .nav-inner {
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: flex !important;
+/* The centered container for BB and the page title */
+.nav-center-dynamic {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* 3. Force the clickable BB link to show up bright white */
-a.nav-logo-left {
+/* The BB Logo inside the subpage header */
+.nav-logo-link {
     display: flex !important;
     align-items: center !important;
     color: #ffffff !important;
-    opacity: 1 !important;
-    visibility: visible !important;
     font-size: 2.2rem !important;
     text-decoration: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
-/* Mobile size fix for the subpage logo */
+/* The Subpage Title that expands next to the logo */
+.nav-dynamic-title {
+    font-size: 1.3rem;
+    color: var(--zinc-text); /* Muted gray to separate it from the white logo */
+    white-space: nowrap;
+    overflow: hidden;
+    animation: expandNavTitle linear both;
+    animation-timeline: scroll();
+    animation-range: 80px 220px; /* Expands smoothly as user scrolls down */
+}
+
+@keyframes expandNavTitle {
+    0% { 
+        max-width: 0px; 
+        opacity: 0; 
+        margin-left: 0px; 
+    }
+    100% { 
+        max-width: 200px; 
+        opacity: 1; 
+        margin-left: 15px; /* Adds space between BB and Newsroom */
+    }
+}
+
+/* Fade out the big on-page title so it seamlessly "transfers" to the header */
+.subpage-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+    color: #fff;
+    text-align: center;
+    animation: fadeOutMainTitle linear both;
+    animation-timeline: scroll();
+    animation-range: 0px 180px; 
+}
+
+@keyframes fadeOutMainTitle {
+    to { 
+        opacity: 0; 
+        transform: translateY(-40px) scale(0.95); 
+    }
+}
+
+/* Mobile size fix */
 @media (max-width: 768px) {
-    a.nav-logo-left {
+    .nav-logo-link {
         font-size: 1.8rem !important;
+    }
+    .nav-dynamic-title {
+        font-size: 1rem;
     }
 }
