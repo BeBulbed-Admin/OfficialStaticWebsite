@@ -322,7 +322,7 @@ body, .font-helvetica {
 
 .news-card:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-3px); }
 
-/* --- 12. THE REFINED 'CAR PARKING' HEADER --- */
+/* --- 12. THE MECHANICAL 'CAR PARKING' HEADER --- */
 
 .subpage-nav {
     position: fixed;
@@ -338,13 +338,13 @@ body, .font-helvetica {
     animation: none !important;
 }
 
-/* The Parking Garage (Centered Unit) */
+/* THE PARKING GARAGE: This container keeps everything centered as a group */
 .nav-dock-wrapper {
     position: absolute;
     left: 50%;
     top: 0;
     height: 100%;
-    transform: translateX(-50%); /* Keeps the logo + text unit centered as one */
+    transform: translateX(-50%); /* Start Dead Center */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -358,7 +358,7 @@ body, .font-helvetica {
     font-size: 2.2rem !important;
     text-decoration: none !important;
     pointer-events: auto;
-    flex-shrink: 0; /* Prevents the logo from squishing */
+    flex-shrink: 0; /* Prevents logo from squishing */
 }
 
 .nav-park-text {
@@ -367,22 +367,23 @@ body, .font-helvetica {
     white-space: nowrap;
     overflow: hidden;
     
-    /* THE PARKING PHYSICS: 
-       Start with 0 width so the logo is dead center.
-       As you scroll, it 'grows' and pushes the logo left. */
+    /* THE MECHANICAL GAP: 
+       We start with 0 width. As it expands, it physically 
+       pushes the logo left to maintain the container's center. */
     width: 0px;
     opacity: 0;
-    
-    animation: parkCar linear both;
+    margin-left: 0px;
+
+    animation: expandAndPark linear both;
     animation-timeline: scroll();
-    animation-range: 40px 150px; /* Tightened for a snappier feel */
+    animation-range: 60px 160px; /* Snappy transition */
 }
 
-@keyframes parkCar {
+@keyframes expandAndPark {
     to { 
-        width: 110px; /* Enough for 'Newsroom' */
+        width: 115px; /* Adjust based on word length */
         opacity: 1; 
-        margin-left: 12px; /* This is the tight gap you wanted */
+        margin-left: 15px; /* Tight, perfect gap */
     }
 }
 
@@ -392,33 +393,28 @@ body, .font-helvetica {
     margin-bottom: 40px;
     color: #fff;
     text-align: center;
-    z-index: 2100; /* Stays above the nav bar while flying */
     position: relative;
-    pointer-events: none;
+    z-index: 500;
     
-    /* THE HAND-OFF: 
-       The big title flies up and shrinks into the parking spot */
-    animation: flyToGarage linear both;
+    /* The big title rises slightly and fades away as the 'parked' version grows */
+    animation: fadeIntoHeader linear both;
     animation-timeline: scroll();
-    animation-range: 0px 150px;
+    animation-range: 0px 120px;
 }
 
-@keyframes flyToGarage {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { 
-        transform: translateY(-132px) scale(0.35); 
-        opacity: 0; /* Vanishes exactly as the nav-park-text takes over */
+@keyframes fadeIntoHeader {
+    to { 
+        opacity: 0; 
+        transform: translateY(-40px); 
+        visibility: hidden; 
     }
 }
 
-/* Mobile Tuning */
+/* Mobile Tweak */
 @media (max-width: 768px) {
     .nav-logo-link { font-size: 1.8rem !important; }
     .nav-park-text { font-size: 1rem; }
-    @keyframes parkCar {
-        to { width: 85px; opacity: 1; margin-left: 10px; }
-    }
-    @keyframes flyToGarage {
-        to { transform: translateY(-138px) scale(0.4); opacity: 0; }
+    @keyframes expandAndPark {
+        to { width: 90px; opacity: 1; margin-left: 10px; }
     }
 }
