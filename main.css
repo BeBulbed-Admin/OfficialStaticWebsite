@@ -332,3 +332,150 @@ body, .font-helvetica {
     .footer-right { justify-content: flex-start; }
     .footer-system { padding: 12px 0; }
 }
+
+/* --- 10. SUBPAGE STYLES (News, Contact, Legal) --- */
+
+.subpage-container {
+    position: relative;
+    z-index: 400;
+    padding-top: 15vh; /* Pushes content below the top fade mask */
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subpage-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+    color: #fff;
+    text-align: center;
+}
+
+/* Legal & Text Content Pages */
+.text-content-block {
+    width: 100%;
+    max-width: 750px;
+    padding: 0 25px 15vh 25px;
+    color: var(--zinc-text);
+    line-height: 1.8;
+    font-size: 0.95rem;
+}
+
+.text-content-block h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 2.5rem 0 1rem 0;
+}
+
+.text-content-block p {
+    margin-bottom: 1.5rem;
+}
+
+/* Contact Form */
+.contact-form-wrapper {
+    width: 100%;
+    max-width: 500px;
+    padding: 0 25px 15vh 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-field {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+    border-radius: 12px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.form-field::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.form-field:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+textarea.form-field {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.btn-submit {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* --- 11. NEWSROOM STYLES --- */
+.news-grid {
+    width: 100%;
+    max-width: 850px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 25px 15vh 25px;
+}
+
+.news-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-decoration: none;
+    color: #fff;
+    transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.news-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.news-date {
+    font-size: 0.8rem;
+    color: var(--zinc-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
+.news-headline {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.news-excerpt {
+    font-size: 0.95rem;
+    color: var(--zinc-text);
+    line-height: 1.6;
+    font-weight: 300;
+}
