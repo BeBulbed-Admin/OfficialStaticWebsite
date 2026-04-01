@@ -322,7 +322,7 @@ body, .font-helvetica {
 
 .news-card:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-3px); }
 
-/* --- 12. THE MECHANICAL 'CAR PARKING' HEADER --- */
+/* --- 12. THE BULLETPROOF 'CAR PARKING' HEADER --- */
 
 .subpage-nav {
     position: fixed;
@@ -333,13 +333,14 @@ body, .font-helvetica {
     background: rgba(13, 13, 13, 0.9) !important;
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    z-index: 1000; /* Nav sits at the base */
+    /* Nav is at 1000. Title must be higher to go OVER it. */
+    z-index: 1000; 
     transform: translateY(0) !important;
     animation: none !important;
 }
 
-/* THE PARKING GARAGE (Centered Container) */
-.nav-dock-wrapper {
+/* THE GARAGE: Always Centered */
+.nav-parking-garage {
     position: absolute;
     left: 50%;
     top: 0;
@@ -348,52 +349,51 @@ body, .font-helvetica {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
 }
 
 .nav-logo-link {
-    position: absolute;
     display: flex !important;
-    color: #ffffff !important;
+    color: #fff !important;
     font-size: 2.2rem !important;
     text-decoration: none !important;
-    
-    /* LOGO START: Dead Center */
-    left: 50%;
-    transform: translateX(-50%); 
-    
-    /* LOGO MOVEMENT: Slides left to 'open the parking space' */
-    animation: shiftLogoLeft linear both;
-    animation-timeline: scroll();
-    animation-range: 50px 250px; /* Slower, smoother range */
+    flex-shrink: 0;
 }
 
-@keyframes shiftLogoLeft {
-    /* Moves the logo left exactly enough to sit beside the title */
-    to { transform: translateX(-140%); } 
+/* THE SPOT: This grows to push the logo left */
+.target-parking-spot {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 0px; /* Starts at zero */
+    
+    animation: openSpot linear both;
+    animation-timeline: scroll();
+    animation-range: 50px 200px;
+}
+
+@keyframes openSpot {
+    to { 
+        width: 130px; /* Width of 'Newsroom' + gap */
+    }
 }
 
 .nav-park-text {
-    position: absolute;
     font-size: 1.3rem;
     color: var(--zinc-text);
-    white-space: nowrap;
-    
-    /* TITLE START: Dead Center */
-    left: 50%;
-    transform: translateX(-50%); 
+    margin-left: 15px; /* The gap between BB and Newsroom */
     opacity: 0;
+    white-space: nowrap;
 
-    /* REVEAL: Fades in exactly when the big title 'lands' */
-    animation: revealDockedTitle linear both;
+    animation: revealText linear both;
     animation-timeline: scroll();
-    animation-range: 180px 250px;
+    animation-range: 150px 200px;
 }
 
-@keyframes revealDockedTitle {
+@keyframes revealText {
     to { opacity: 1; }
 }
 
+/* THE CAR: The big title on the page */
 .subpage-title {
     font-size: clamp(2rem, 5vw, 3.5rem);
     color: #fff;
@@ -401,21 +401,21 @@ body, .font-helvetica {
     position: relative;
     margin-bottom: 40px;
     
-    /* VISIBILITY: High z-index so it stays visible over the nav bar */
-    z-index: 2000; 
+    /* CRITICAL: Higher than nav so it flies OVER the bar */
+    z-index: 5000; 
     pointer-events: none;
     
-    /* THE LANDING: Rises center-line, shrinks, and vanishes as it docks */
-    animation: parkTheTitle linear both;
+    /* ANIMATION: Shrink and Dock */
+    animation: driveIntoNav linear both;
     animation-timeline: scroll();
-    animation-range: 0px 250px; /* Matched range for perfect sync */
+    animation-range: 0px 200px;
 }
 
-@keyframes parkTheTitle {
+@keyframes driveIntoNav {
     0% { transform: translateY(0) scale(1); opacity: 1; }
-    /* The Land: We use -122px to drop it perfectly in the center of the 70px bar */
+    /* We fly up exactly to the nav bar and shrink to match header text */
     100% { 
-        transform: translateY(-122px) scale(0.38); 
+        transform: translateY(-132px) scale(0.38); 
         opacity: 0; 
     }
 }
@@ -423,8 +423,8 @@ body, .font-helvetica {
 /* Mobile Tuning */
 @media (max-width: 768px) {
     .nav-logo-link { font-size: 1.8rem !important; }
-    @keyframes shiftLogoLeft { to { transform: translateX(-120%); } }
-    @keyframes parkTheTitle {
-        to { transform: translateY(-128px) scale(0.4); opacity: 0; }
+    @keyframes openSpot { to { width: 95px; } }
+    @keyframes driveIntoNav {
+        to { transform: translateY(-135px) scale(0.4); opacity: 0; }
     }
 }
