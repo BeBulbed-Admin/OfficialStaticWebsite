@@ -322,7 +322,7 @@ body, .font-helvetica {
 
 .news-card:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-3px); }
 
-/* --- 12. ADVANCED DOCKING MECHANICS --- */
+/* --- 12. MECHANICAL DOCKING HEADER --- */
 
 .subpage-nav {
     position: fixed;
@@ -333,33 +333,22 @@ body, .font-helvetica {
     background: rgba(13, 13, 13, 0.9) !important;
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    z-index: 2000; /* Keeps nav above all scrolling content */
+    z-index: 2000;
     transform: translateY(0) !important;
     animation: none !important;
 }
 
-/* This is the track that moves everything as one unit */
+/* This container holds both BB and the Title as one unit */
 .nav-dock-container {
     position: absolute;
     left: 50%;
     top: 0;
     height: 100%;
+    transform: translateX(-50%); /* Keeps the GROUP centered */
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateX(-50%); /* Start perfectly centered */
-    
-    /* ANIMATION: Slides the entire unit left as you scroll */
-    animation: shiftDockLeft linear both;
-    animation-timeline: scroll();
-    animation-range: 50px 180px;
-}
-
-@keyframes shiftDockLeft {
-    /* We slide left by about 65px (adjust as needed) 
-       to center the 'BB Logo + Newsroom' combo as a whole 
-    */
-    to { transform: translateX(-85%); } 
+    pointer-events: none;
 }
 
 .nav-logo-link {
@@ -368,24 +357,33 @@ body, .font-helvetica {
     color: #ffffff !important;
     font-size: 2.2rem !important;
     text-decoration: none !important;
-    transition: transform 0.2s ease;
+    pointer-events: auto;
 }
 
+/* The header text that 'grows' next to the logo */
 .nav-dock-title {
     font-size: 1.3rem;
     color: var(--zinc-text);
     white-space: nowrap;
-    margin-left: 18px; /* Space between logo and text */
-    opacity: 0;
+    overflow: hidden;
     
-    /* ANIMATION: Becomes visible only when the docking is complete */
-    animation: revealDockTitle linear both;
+    /* MECHANICAL FIX: Start with 0 width so logo is dead center. 
+       As it grows, it pushes the logo to the left. */
+    width: 0px; 
+    opacity: 0;
+    margin-left: 0px;
+
+    animation: expandAndPush linear both;
     animation-timeline: scroll();
-    animation-range: 150px 200px;
+    animation-range: 80px 200px;
 }
 
-@keyframes revealDockTitle {
-    to { opacity: 1; }
+@keyframes expandAndPush {
+    to { 
+        width: 110px; /* Adjust this number to fit the word exactly */
+        opacity: 1; 
+        margin-left: 20px; /* Creates the gap between BB and Newsroom */
+    }
 }
 
 .subpage-title {
@@ -394,36 +392,25 @@ body, .font-helvetica {
     margin-bottom: 40px;
     color: #fff;
     text-align: center;
-    z-index: 2100; /* Sits ABOVE the nav bar during the flight */
+    z-index: 1500; 
     position: relative;
-    pointer-events: none;
     
-    /* ANIMATION: Flies UP into the header bar and shrinks */
-    animation: physicalDocking linear both;
+    /* ANIMATION: Rises and fades just as the header word expands */
+    animation: transferTitleUp linear both;
     animation-timeline: scroll();
-    animation-range: 0px 200px;
+    animation-range: 0px 180px;
 }
 
-@keyframes physicalDocking {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    90% { opacity: 1; } /* Stay bright until the end */
-    100% { 
-        /* Physically land in the header spot */
-        transform: translateY(-132px) scale(0.35); 
-        opacity: 0; 
-    }
+@keyframes transferTitleUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-110px); opacity: 0; }
 }
 
-/* --- MOBILE TWEAKS --- */
+/* Mobile Adjustment */
 @media (max-width: 768px) {
     .nav-logo-link { font-size: 1.8rem !important; }
-    .nav-dock-title { font-size: 1rem; margin-left: 12px; }
-    
-    @keyframes shiftDockLeft {
-        to { transform: translateX(-70%); }
-    }
-    
-    @keyframes physicalDocking {
-        to { transform: translateY(-138px) scale(0.4); opacity: 0; }
+    .nav-dock-title { font-size: 1rem; }
+    @keyframes expandAndPush {
+        to { width: 85px; opacity: 1; margin-left: 12px; }
     }
 }
