@@ -322,7 +322,7 @@ body, .font-helvetica {
 
 .news-card:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-3px); }
 
-/* --- 12. THE BULLETPROOF 'CAR PARKING' HEADER --- */
+/* --- 12. THE MECHANICAL 'CAR PARKING' HEADER --- */
 
 .subpage-nav {
     position: fixed;
@@ -333,98 +333,69 @@ body, .font-helvetica {
     background: rgba(13, 13, 13, 0.9) !important;
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    /* Nav is at 1000. Title must be higher to go OVER it. */
-    z-index: 1000; 
+    z-index: 2000; /* Navigation is the master layer */
     transform: translateY(0) !important;
     animation: none !important;
 }
 
-/* THE GARAGE: Always Centered */
-.nav-parking-garage {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    height: 100%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
+/* THE LOGO: Starts far left (like in your screenshot) and parks in the center */
 .nav-logo-link {
+    position: absolute;
+    top: 50%;
+    /* START: Far left like your picture */
+    left: 30px; 
+    transform: translateY(-50%);
     display: flex !important;
-    color: #fff !important;
+    color: #ffffff !important;
     font-size: 2.2rem !important;
     text-decoration: none !important;
-    flex-shrink: 0;
-}
-
-/* THE SPOT: This grows to push the logo left */
-.target-parking-spot {
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    width: 0px; /* Starts at zero */
+    z-index: 2100;
     
-    animation: openSpot linear both;
-    animation-timeline: scroll();
-    animation-range: 50px 200px;
-}
-
-@keyframes openSpot {
-    to { 
-        width: 130px; /* Width of 'Newsroom' + gap */
-    }
-}
-
-.nav-park-text {
-    font-size: 1.3rem;
-    color: var(--zinc-text);
-    margin-left: 15px; /* The gap between BB and Newsroom */
-    opacity: 0;
-    white-space: nowrap;
-
-    animation: revealText linear both;
-    animation-timeline: scroll();
-    animation-range: 150px 200px;
-}
-
-@keyframes revealText {
-    to { opacity: 1; }
-}
-
-/* THE CAR: The big title on the page */
-.subpage-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    color: #fff;
-    text-align: center;
-    position: relative;
-    margin-bottom: 40px;
-    
-    /* CRITICAL: Higher than nav so it flies OVER the bar */
-    z-index: 5000; 
-    pointer-events: none;
-    
-    /* ANIMATION: Shrink and Dock */
-    animation: driveIntoNav linear both;
+    /* LOGO MOVEMENT: Slides right to park next to the title */
+    animation: parkLogoRight linear both;
     animation-timeline: scroll();
     animation-range: 0px 200px;
 }
 
-@keyframes driveIntoNav {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    /* We fly up exactly to the nav bar and shrink to match header text */
-    100% { 
-        transform: translateY(-132px) scale(0.38); 
-        opacity: 0; 
+@keyframes parkLogoRight {
+    /* Moves the logo from the far left to just left of the center-line */
+    to { left: calc(50% - 95px); } 
+}
+
+/* THE TITLE: Centered anchor that shrinks and docks */
+.subpage-title {
+    position: fixed; /* Keeps it locked on the center-line */
+    left: 50%;
+    top: 15vh; /* Initial vertical position */
+    transform: translateX(-50%) scale(1);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 2100; /* Same layer as logo, above the black nav bar background */
+    pointer-events: none;
+    
+    /* THE LANDING: Rises center-line, shrinks, and sticks in the bar */
+    animation: dockTitleInCenter linear both;
+    animation-timeline: scroll();
+    animation-range: 0px 200px;
+}
+
+@keyframes dockTitleInCenter {
+    to { 
+        /* Land exactly 35px from top (middle of 70px bar) */
+        top: 35px; 
+        transform: translateX(-50%) translateY(-50%) scale(0.4); 
+        color: var(--zinc-text); /* Matches the premium 'parked' look */
     }
 }
 
 /* Mobile Tuning */
 @media (max-width: 768px) {
-    .nav-logo-link { font-size: 1.8rem !important; }
-    @keyframes openSpot { to { width: 95px; } }
-    @keyframes driveIntoNav {
-        to { transform: translateY(-135px) scale(0.4); opacity: 0; }
+    .nav-logo-link { font-size: 1.8rem !important; left: 20px; }
+    @keyframes parkLogoRight { to { left: calc(50% - 75px); } }
+    .subpage-title { top: 12vh; }
+    @keyframes dockTitleInCenter {
+        to { top: 35px; transform: translateX(-50%) translateY(-50%) scale(0.45); }
     }
 }
