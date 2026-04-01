@@ -300,62 +300,8 @@ body, .font-helvetica {
     align-items: center;
 }
 
-/* Legal & Text Content Pages */
-.text-content-block {
-    width: 100%;
-    max-width: 750px;
-    padding: 0 25px 15vh 25px;
-    color: var(--zinc-text);
-    line-height: 1.8;
-    font-size: 0.95rem;
-}
-
-.text-content-block h3 { color: #fff; font-size: 1.2rem; margin: 2.5rem 0 1rem 0; }
-.text-content-block p { margin-bottom: 1.5rem; }
-
-/* Contact Form */
-.contact-form-wrapper {
-    width: 100%;
-    max-width: 500px;
-    padding: 0 25px 15vh 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.form-field {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border);
-    padding: 16px 20px;
-    border-radius: 12px;
-    color: #fff;
-    font-family: inherit;
-    font-size: 0.95rem;
-    transition: all var(--transition-speed) ease;
-}
-
-.form-field::placeholder { color: rgba(255, 255, 255, 0.3); }
-.form-field:focus { outline: none; border-color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.05); }
-
-textarea.form-field { min-height: 150px; resize: vertical; }
-
-.btn-submit {
-    background: #fff;
-    color: #000;
-    border: none;
-    padding: 16px;
-    border-radius: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-top: 10px;
-}
-
-.btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }
-
-/* --- 10. NEWSROOM STYLES --- */
-.news-grid {
+/* --- 10. NEWSROOM/CONTACT CONTENT --- */
+.contact-form-wrapper, .news-grid {
     width: 100%;
     max-width: 850px;
     display: flex;
@@ -376,18 +322,7 @@ textarea.form-field { min-height: 150px; resize: vertical; }
 
 .news-card:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-3px); }
 
-.news-date {
-    font-size: 0.8rem;
-    color: var(--zinc-text);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 500;
-}
-
-.news-headline { font-size: clamp(1.2rem, 3vw, 1.5rem); line-height: 1.4; margin: 8px 0; }
-.news-excerpt { font-size: 0.95rem; color: var(--zinc-text); line-height: 1.6; }
-
-/* --- 12. DYNAMIC DOCKING PHYSICS --- */
+/* --- 12. ADVANCED DOCKING LOGIC (SUBPAGES) --- */
 
 .subpage-nav {
     position: fixed;
@@ -395,10 +330,10 @@ textarea.form-field { min-height: 150px; resize: vertical; }
     left: 0;
     width: 100%;
     height: 70px;
-    background: rgba(13, 13, 13, 0.85) !important; 
+    background: rgba(13, 13, 13, 0.85) !important;
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    z-index: 1000;
+    z-index: 1000; /* Nav sits high */
     transform: translateY(0) !important;
     animation: none !important;
 }
@@ -408,19 +343,19 @@ textarea.form-field { min-height: 150px; resize: vertical; }
     left: 50%;
     top: 0;
     height: 100%;
-    transform: translateX(-50%); /* Start Dead Center */
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
     
-    /* PHYSICS: This container slides left to make room */
-    animation: slideNavLeft linear both;
+    /* Logo slides left only as title docks */
+    animation: shiftLogoLeft linear both;
     animation-timeline: scroll();
-    animation-range: 60px 180px; 
+    animation-range: 120px 200px;
 }
 
-@keyframes slideNavLeft {
-    to { transform: translateX(-80%); } /* Slides left */
+@keyframes shiftLogoLeft {
+    to { transform: translateX(-85%); }
 }
 
 .nav-logo-link {
@@ -436,20 +371,18 @@ textarea.form-field { min-height: 150px; resize: vertical; }
     color: var(--zinc-text);
     white-space: nowrap;
     position: absolute;
-    left: 100%; /* Sits to the right of the BB logo */
+    left: 100%; 
     margin-left: 20px;
+    opacity: 0; /* Hidden 'ghost' title */
     
-    /* PHYSICS: Travels UP into the header bar */
-    transform: translateY(100px); 
-    opacity: 0;
-    
-    animation: dockIntoHeader linear both;
+    /* Ghost becomes visible as real title arrives */
+    animation: revealGhostTitle linear both;
     animation-timeline: scroll();
-    animation-range: 40px 180px; 
+    animation-range: 160px 200px;
 }
 
-@keyframes dockIntoHeader {
-    to { transform: translateY(0); opacity: 1; }
+@keyframes revealGhostTitle {
+    to { opacity: 1; }
 }
 
 .subpage-title {
@@ -458,22 +391,29 @@ textarea.form-field { min-height: 150px; resize: vertical; }
     margin-bottom: 40px;
     color: #fff;
     text-align: center;
-    z-index: 500;
+    z-index: 1100; /* ABOVE the nav bar */
+    position: relative;
+    pointer-events: none; /* Can't click through it to hit nav while moving */
     
-    /* PHYSICS: The main page title rises and fades as it 'transfers' */
-    animation: transferTitleUp linear both;
+    /* THE DOCKING: Travels UP over the nav, shrinks, and vanishes at the landing spot */
+    animation: physicalDocking linear both;
     animation-timeline: scroll();
-    animation-range: 0px 180px;
+    animation-range: 0px 200px;
 }
 
-@keyframes transferTitleUp {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-100px); opacity: 0; }
+@keyframes physicalDocking {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    80% { opacity: 1; } /* Stay bright until the very last moment */
+    100% { 
+        transform: translateY(-132px) scale(0.35); 
+        opacity: 0; /* Vanishes exactly as it hits the nav-dock-title spot */
+    }
 }
 
-/* Mobile Tweak */
 @media (max-width: 768px) {
-    @keyframes slideNavLeft { to { transform: translateX(-70%); } }
     .nav-logo-link { font-size: 1.8rem !important; }
     .nav-dock-title { font-size: 1rem; margin-left: 12px; }
+    @keyframes physicalDocking {
+        to { transform: translateY(-138px) scale(0.4); opacity: 0; }
+    }
 }
