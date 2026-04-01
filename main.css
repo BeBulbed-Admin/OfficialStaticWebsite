@@ -4,7 +4,7 @@
     --bg-alt: #111111; 
     --border: rgba(255, 255, 255, 0.14); 
     --zinc-text: #a1a1a1;
-    --nav-height: 85px;
+    --nav-height: 70px;
     --transition-speed: 0.4s;
 }
 
@@ -295,68 +295,39 @@ body, .font-helvetica {
 /* --- 8. DEPTH CONTROL --- */
 .content-wrapper { height: 230vh; }
 
-/* --- 9. POLISHED MOBILE RESPONSIVENESS --- */
+/* --- 9. REFINED MOBILE VIEW (FIXED BUTTON WIDTH) --- */
 @media (max-width: 768px) {
-    /* 1. Scale down the logo glide more aggressively */
-    @keyframes logoGlideUp {
-        from { transform: translateY(0) scale(1); }
-        to { transform: translateY(-42vh) scale(0.25); }
-    }
+    
+    /* ... keep your other mobile rules (logo, slogan, etc.) ... */
 
-    /* 2. Optimized spacing (Resting points) */
-    .slogan-reveal {
-        --target-y: -78vh; /* Lowered slightly to clear the logo */
-        animation-range: 15% 45%;
-    }
-
-    .para-reveal {
-        --target-y: -58vh; /* Moved down to create a clear gap from slogan */
-        animation-range: 25% 60%;
-    }
-
-    .blocks-reveal {
-        --target-y: -18vh; /* Pushed much lower to clear the text signature */
-        animation-range: 35% 85%;
-    }
-
-    /* 3. Text Refinements */
-    .body-slogan {
-        font-size: 0.95rem !important; /* Smaller, sophisticated scale */
-        padding: 0 30px;
-        line-height: 1.5;
-        letter-spacing: 0.05em; /* Added a bit of air between letters */
-    }
-
-    .body-para {
-        font-size: 0.78rem !important; /* Elegant, small-text look */
-        padding: 0 25px;
-        line-height: 1.7;
-        max-width: 100%;
-        color: rgba(161, 161, 161, 0.9); /* Zinc color with slight transparency */
-    }
-
-    /* 4. T-Grid Adjustments */
     .t-grid-container {
-        max-width: 85%;
-        gap: 15px;
+        max-width: 90%;
+        gap: 12px;
     }
 
     .t-row-top {
-        gap: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px; /* Matching the vertical gap */
+    }
+
+    .t-row-bottom {
+        display: flex;
+        justify-content: center;
+        margin-top: 2px; /* Slight adjustment to keep the T-shape tight */
+    }
+
+    /* THIS IS THE FIX: */
+    .t-row-bottom .box-card {
+        /* Instead of 100%, we make it match the 1/3 width of the top row */
+        width: calc(33.33% - 8px); 
+        min-width: 100px; /* Ensures the text doesn't get squashed on tiny phones */
     }
 
     .box-card {
-        height: 50px;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.03); /* Subtle button background */
+        height: 46px; 
+        border-radius: 8px;
     }
 
-    .t-row-bottom .box-card {
-        width: 100%;
-    }
-
-    .box-title {
-        font-size: 0.6rem;
-        letter-spacing: 0.25em;
-    }
+    /* ... keep the rest of your mobile footer/text rules ... */
 }
