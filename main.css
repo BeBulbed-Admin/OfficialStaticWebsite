@@ -294,7 +294,7 @@ body, .font-helvetica {
 /* --- 8. DEPTH CONTROL --- */
 .content-wrapper { height: 230vh; }
 
-/* --- 9. FINAL MOBILE REFINEMENT (VERTICAL COLUMN) --- */
+/* --- 9. FINAL MOBILE REFINEMENT (CENTERED & COLUMN) --- */
 @media (max-width: 768px) {
     
     /* 1. Logo Anchor */
@@ -309,6 +309,7 @@ body, .font-helvetica {
         to { transform: translateY(-36vh) scale(0.4); } 
     }
 
+    /* 2. Vertical Spacing */
     .slogan-reveal {
         --target-y: -78vh; 
         animation-range: 5% 35%;
@@ -324,19 +325,23 @@ body, .font-helvetica {
         animation-range: 25% 75%;
     }
 
-    /* 3. Text Refinement */
+    /* 3. Text Refinement - ADDED CENTERING HERE */
     .body-slogan {
-        font-size: 1.05rem !important;
+        font-size: 0.95rem !important;
         padding: 0 25px;
         line-height: 1.3;
+        text-align: center; /* This ensures wrapped text is centered */
+        width: 100%;        /* Forces the element to use the full width for centering */
     }
 
     .body-para {
         font-size: 0.8rem !important;
         padding: 0 35px;
         line-height: 1.5;
+        text-align: center; /* Ensuring paragraph stays centered too */
     }
 
+    /* 4. Column Fix */
     .t-grid-container {
         max-width: 75%; 
         gap: 12px;
@@ -355,7 +360,7 @@ body, .font-helvetica {
     }
 
     .t-row-bottom .box-card {
-        width: 100% !important; /
+        width: 100% !important; 
     }
 
     .box-card {
