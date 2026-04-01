@@ -295,39 +295,68 @@ body, .font-helvetica {
 /* --- 8. DEPTH CONTROL --- */
 .content-wrapper { height: 230vh; }
 
-/* --- 9. REFINED MOBILE VIEW (FIXED BUTTON WIDTH) --- */
+/* --- 9. FINAL MOBILE REFINEMENT (ZERO OVERLAP) --- */
 @media (max-width: 768px) {
     
-    /* ... keep your other mobile rules (logo, slogan, etc.) ... */
+    /* 1. Logo Anchor - Keeps the name visible at the top */
+    .hero-logo {
+        animation: mobileLogoGlide linear both;
+        animation-timeline: scroll();
+        animation-range: 0% 20%;
+    }
 
+    @keyframes mobileLogoGlide {
+        from { transform: translateY(0) scale(1); }
+        to { transform: translateY(-34vh) scale(0.42); } 
+    }
+
+    /* 2. Vertical Spacing - Increased the gap between targets */
+    .slogan-reveal {
+        --target-y: -82vh; /* Pushed higher */
+        animation-range: 5% 35%;
+    }
+
+    .para-reveal {
+        --target-y: -54vh; /* Pushed lower (28vh total gap now) */
+        animation-range: 20% 50%;
+    }
+
+    .blocks-reveal {
+        --target-y: -26vh; /* Adjusted to keep the bottom clear */
+        animation-range: 35% 70%;
+    }
+
+    /* 3. Text Refinement - Tightened line-height to save space */
+    .body-slogan {
+        font-size: 1.05rem !important; /* Slightly smaller to prevent 4-line wrap */
+        padding: 0 25px;
+        line-height: 1.2; /* Tightened */
+        letter-spacing: 0.05em;
+        margin-bottom: 20px;
+    }
+
+    .body-para {
+        font-size: 0.78rem !important;
+        padding: 0 30px;
+        line-height: 1.4; /* Tightened */
+        max-width: 100%;
+    }
+
+    /* 4. Button Grid - Clean T-shape */
     .t-grid-container {
-        max-width: 90%;
+        max-width: 85%;
         gap: 12px;
     }
 
-    .t-row-top {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 12px; /* Matching the vertical gap */
-    }
-
-    .t-row-bottom {
-        display: flex;
-        justify-content: center;
-        margin-top: 2px; /* Slight adjustment to keep the T-shape tight */
-    }
-
-    /* THIS IS THE FIX: */
     .t-row-bottom .box-card {
-        /* Instead of 100%, we make it match the 1/3 width of the top row */
         width: calc(33.33% - 8px); 
-        min-width: 100px; /* Ensures the text doesn't get squashed on tiny phones */
+        min-width: 90px;
     }
 
     .box-card {
-        height: 46px; 
-        border-radius: 8px;
+        height: 44px; /* Slightly slimmer to avoid hitting the paragraph */
     }
 
-    /* ... keep the rest of your mobile footer/text rules ... */
+    /* 5. Shorter scroll for mobile */
+    .content-wrapper { height: 150vh !important; }
 }
