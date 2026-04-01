@@ -295,77 +295,68 @@ body, .font-helvetica {
 /* --- 8. DEPTH CONTROL --- */
 .content-wrapper { height: 230vh; }
 
-/* --- 9. MOBILE RESPONSIVENESS --- */
+/* --- 9. POLISHED MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-    /* 1. Shrink the main logo more so it clears the space */
+    /* 1. Scale down the logo glide more aggressively */
     @keyframes logoGlideUp {
         from { transform: translateY(0) scale(1); }
-        to { transform: translateY(-40vh) scale(0.28); }
+        to { transform: translateY(-42vh) scale(0.25); }
     }
 
-    /* 2. Increase the gaps between elements to prevent overlapping */
+    /* 2. Optimized spacing (Resting points) */
     .slogan-reveal {
-        --target-y: -82vh; /* Move slogan way up */
+        --target-y: -78vh; /* Lowered slightly to clear the logo */
         animation-range: 15% 45%;
     }
 
     .para-reveal {
-        --target-y: -65vh; /* Create a 17vh gap below slogan */
+        --target-y: -58vh; /* Moved down to create a clear gap from slogan */
         animation-range: 25% 60%;
     }
 
     .blocks-reveal {
-        --target-y: -28vh; /* Give the bottom blocks plenty of room */
+        --target-y: -18vh; /* Pushed much lower to clear the text signature */
         animation-range: 35% 85%;
     }
 
-    /* 3. Scale down text sizes for smaller screens */
+    /* 3. Text Refinements */
     .body-slogan {
-        font-size: 1.1rem !important; /* Smaller but still clear */
-        padding: 0 15px;
-        line-height: 1.4;
+        font-size: 0.95rem !important; /* Smaller, sophisticated scale */
+        padding: 0 30px;
+        line-height: 1.5;
+        letter-spacing: 0.05em; /* Added a bit of air between letters */
     }
 
     .body-para {
-        font-size: 0.82rem !important; /* Tiny and refined */
-        padding: 0 20px;
-        line-height: 1.6;
+        font-size: 0.78rem !important; /* Elegant, small-text look */
+        padding: 0 25px;
+        line-height: 1.7;
         max-width: 100%;
+        color: rgba(161, 161, 161, 0.9); /* Zinc color with slight transparency */
     }
 
-    /* 4. Fix the "T" grid for narrow thumbs */
+    /* 4. T-Grid Adjustments */
     .t-grid-container {
-        max-width: 90%;
-        gap: 12px;
+        max-width: 85%;
+        gap: 15px;
     }
 
     .t-row-top {
-        gap: 8px; /* Tighten the horizontal gap */
+        gap: 10px;
     }
 
     .box-card {
-        height: 48px; /* Slimmer buttons */
-        border-radius: 8px;
+        height: 50px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.03); /* Subtle button background */
     }
 
     .t-row-bottom .box-card {
-        width: 100%; /* Make Social button full width of the T-container */
+        width: 100%;
     }
 
     .box-title {
         font-size: 0.6rem;
-        letter-spacing: 0.2em;
-    }
-
-    /* 5. Adjust Footer for Mobile */
-    .footer-inner {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
-    }
-    
-    .footer-system {
-        height: auto;
-        padding: 15px 0;
+        letter-spacing: 0.25em;
     }
 }
