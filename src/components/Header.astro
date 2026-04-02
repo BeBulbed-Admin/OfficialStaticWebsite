@@ -1,0 +1,13 @@
+---
+// src/components/Header.astro
+const { isHome, isStatic } = Astro.props;
+---
+<nav class={isHome ? "home-nav" : (isStatic ? "static-nav" : "sticky-nav subpage-nav")}>
+    <div class="nav-inner">
+        { !isHome && (
+            <a href="/" class={isStatic ? "nav-logo-center font-baumans" : "nav-logo-link font-baumans"} style="text-decoration: none;">
+                <span class="flip-b">B</span><span class="logo-spacer"></span><span>B</span>
+            </a>
+        )}
+    </div>
+</nav>

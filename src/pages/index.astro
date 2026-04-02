@@ -1,0 +1,61 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+<MainLayout title="BeInspired" isHome={true}>
+    <div class="top-fade-mask"></div>
+
+    <header class="logo-hero-container">
+        <h1 class="hero-logo font-baumans">
+            <span class="flip-b">B</span><span class="collapse-text">e</span><span class="logo-spacer"></span><span>B</span><span class="collapse-text">ulbed</span>
+        </h1>
+    </header>
+
+    <main class="content-section">
+        <div class="reveal-container slogan-gap">
+            <h2 class="body-slogan">"Inspired by the world we live in.</h2>
+        </div>
+
+        <div class="reveal-container">
+            <h2 class="body-slogan">Driven by the one we want to see."</h2>
+        </div>
+
+        <div class="reveal-container">
+            <p class="body-para">
+                The world isn't finished yet, and neither are we. 
+                At <span class="font-baumans"><span class="flip-b">B</span>eBulbed</span>, we believe that the way we live today 
+                shouldn't dictate how we live tomorrow. Every great shift starts with a single spark — a moment of clarity 
+                that illuminates a better path forward. Step into a new reality.
+                <br /><br />
+                <span class="font-baumans"><span class="flip-b">B</span>eInspired. <span class="flip-b">B</span>eBulbed.</span>
+            </p>
+        </div>
+
+        <div class="reveal-container grid-top-margin">
+            <div class="t-grid-container">
+                <div class="t-row-top">
+                    <a href="https://social.bebulbed.com" target="_blank" rel="noopener noreferrer" class="box-card">
+                        <h3 class="box-title font-baumans">Social</h3>
+                    </a>
+                </div>
+                
+                <div class="t-row-bottom">
+                    <a href="https://spark.bebulbed.com" target="_blank" rel="noopener noreferrer" class="box-card">
+                        <h3 class="box-title font-baumans">Spark</h3>
+                    </a>
+                    <a href="https://glow.bebulbed.com" target="_blank" rel="noopener noreferrer" class="box-card">
+                        <h3 class="box-title font-baumans">Glow</h3>
+                    </a>
+                    <a href="https://blast.bebulbed.com" target="_blank" rel="noopener noreferrer" class="box-card">
+                        <h3 class="box-title font-baumans">Blast</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="scroll-prompt">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+            <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+        </svg>
+    </div>
+</MainLayout>

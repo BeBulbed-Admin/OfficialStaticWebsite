@@ -1,0 +1,24 @@
+/* --- NEWSROOM SPECIFIC STYLES --- */
+.news-grid {
+    width: 100%;
+    max-width: 850px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 25px 15vh 25px;
+}
+
+.news-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border); /* var(--border) is inherited from ../main.css */
+    border-radius: 14px;
+    padding: 30px;
+    text-decoration: none;
+    color: #fff;
+    transition: all var(--transition-speed) ease;
+}
+
+.news-card:hover { 
+    background: rgba(255, 255, 255, 0.06); 
+    transform: translateY(-3px); 
+}

@@ -1,0 +1,52 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+<MainLayout title="Newsroom">
+    <main class="subpage-container">
+        <h1 class="subpage-title font-baumans">Newsroom</h1>
+        
+        <div class="content-section" style="padding-top: 10vh;">
+            <div class="reveal-container">
+                <div class="news-card-wide">
+                    <span class="news-date">April 2, 2026</span>
+                    <h2 class="news-headline">BeBulbed Unveils Next-Generation Natural Scroll Architecture</h2>
+                    <p class="news-excerpt">Today we are taking a massive leap forward by introducing our completely redesigned web experience, focusing on seamless cinematic transitions and deep user immersion.</p>
+                </div>
+            </div>
+
+            <div class="reveal-container">
+                <div class="news-card-wide">
+                    <span class="news-date">March 15, 2026</span>
+                    <h2 class="news-headline">Expansion Announced Across Australia</h2>
+                    <p class="news-excerpt">We are thrilled to announce our new operational hubs across Australia, bringing our cutting-edge design philosophy to a brand new market from Sydney to Perth.</p>
+                </div>
+            </div>
+
+            <div class="reveal-container">
+                <div class="news-card-wide">
+                    <span class="news-date">February 28, 2026</span>
+                    <h2 class="news-headline">The Spark Initiative: Funding the Future</h2>
+                    <p class="news-excerpt">BeBulbed is committing $5 million to early-stage creators who are building the world they want to see, rather than accepting the world as it is.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</MainLayout>
+
+<style>
+    /* Page-specific styles for the Newsroom feed */
+    .news-card-wide {
+        width: 100%;
+        max-width: 800px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 40px;
+        margin-bottom: 30px;
+        transition: transform 0.3s ease;
+    }
+    .news-card-wide:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.05); }
+    .news-date { color: var(--zinc-text); font-size: 0.9rem; display: block; margin-bottom: 10px; }
+    .news-headline { font-size: 1.5rem; margin-bottom: 15px; font-weight: 500; }
+    .news-excerpt { color: var(--zinc-text); line-height: 1.6; font-weight: 300; }
+</style>

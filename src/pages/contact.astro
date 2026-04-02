@@ -1,0 +1,13 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import '../styles/contact.css'; // Only import contact-specific styles
+---
+<MainLayout title="Contact Us" isStatic={true}>
+    <main class="static-page-container">
+        <h1 class="static-title font-baumans">Contact Us</h1>
+        <div class="contact-wrapper">
+             <p class="contact-message">Get in touch with us directly.</p>
+             <a href="mailto:contact@bebulbed.com" class="btn-email">contact@bebulbed.com</a>
+        </div>
+    </main>
+</MainLayout>
