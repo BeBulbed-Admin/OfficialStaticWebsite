@@ -138,16 +138,15 @@ body, .font-helvetica {
     justify-content: center;
     animation: viewRise linear both;
     animation-timeline: view();
-    animation-range: entry 10% cover 30%; 
+    animation-range: entry 0% cover 15%; 
 }
 
 @keyframes viewRise {
-    from { opacity: 0; transform: translateY(60px); filter: blur(10px); }
-    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .body-slogan {
-    /* Increased from 1.25rem to 1.4rem */
     font-size: 1.4rem; 
     text-transform: uppercase;
     letter-spacing: 0.35em;
@@ -157,42 +156,47 @@ body, .font-helvetica {
 }
 
 .body-para {
-    /* Increased minimum from 1rem to 1.15rem */
     font-size: clamp(1.15rem, 2vw, 1.25rem); 
     color: var(--zinc-text);
     line-height: 1.8; 
     font-weight: 300;
-    max-width: 650px; /* Slightly wider to accommodate larger text */
+    max-width: 650px; 
     text-align: center;
 }
 
-/* --- SLOGAN STACKING FIX --- */
 .slogan-gap {
     margin-bottom: -3.5vh; 
 }
 
+.grid-top-margin {
+    margin-top: 4vh; 
+}
 
 /* --- 6. GRID BUTTONS (INVERTED PYRAMID) --- */
 .t-grid-container {
     width: 100%;
-    max-width: 700px; 
+    /* Tightened from 700px to 580px to match the shorter height */
+    max-width: 580px; 
     display: flex;
     flex-direction: column;
     gap: 20px; 
 }
 
 .t-row-top { display: flex; justify-content: center; gap: 30px; }
+
 .t-row-top .box-card { 
-    width: 210px; 
+    /* Tightened from 210px to 180px */
+    width: 180px; 
     flex-shrink: 0; 
 }
 
-.t-row-bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; }
+.t-row-bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
 
 .box-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    height: 62px; 
+    background: rgba(255, 255, 255, 0.08); 
+    border: 1px solid rgba(255, 255, 255, 0.4); 
+    /* Set to requested 45px */
+    height: 45px; 
     width: 100%;
     border-radius: 12px;
     display: flex;
@@ -218,8 +222,8 @@ body, .font-helvetica {
 
 .box-title { 
     font-family: 'Baumans', cursive;
-    /* Increased from 0.85rem to 1.05rem */
-    font-size: 1.05rem; 
+    /* Adjusted slightly for the tighter box height */
+    font-size: 0.95rem; 
     font-weight: 400; 
     letter-spacing: 0.2em; 
     text-transform: uppercase; 
@@ -260,7 +264,7 @@ body, .font-helvetica {
     justify-content: space-between;
     align-items: center;
     padding: 5px 0;        
-    font-size: 13px;
+    font-size: 15px;
     color: #f5f5f7;
     font-weight: 500;
     cursor: pointer;
@@ -291,7 +295,7 @@ body, .font-helvetica {
     gap: 15px;
 }
 
-.footer-text { font-size: 11.5px; color: var(--zinc-text); font-weight: 400; }
+.footer-text { font-size: 12.5px; color: var(--zinc-text); font-weight: 400; }
 .footer-left { display: flex; align-items: center; gap: 6px; }
 
 .footer-right {
@@ -301,7 +305,7 @@ body, .font-helvetica {
 }
 
 .footer-link {
-    font-size: 11.5px;
+    font-size: 13px;
     color: var(--zinc-text);
     text-decoration: none;
     transition: color var(--transition-speed) ease;
@@ -349,10 +353,12 @@ body, .font-helvetica {
     .body-slogan { font-size: 1.3rem !important; padding: 0 25px; line-height: 1.3; width: 100%; }
     .body-para { font-size: 1.1rem !important; padding: 0 30px; line-height: 1.6; }
     
-    .t-grid-container { max-width: 85%; gap: 12px; }    
+    /* Reduced mobile max-width to keep buttons from stretching too far */
+    .t-grid-container { max-width: 80%; gap: 12px; }    
     .t-row-top { width: 100%; display: flex; flex-direction: column; }    
     .t-row-bottom { display: flex; flex-direction: column; gap: 12px; }    
-    .box-card { width: 100% !important; height: 45px; border-radius: 10px; }
+    /* Reduced mobile height slightly to 40px to keep it slim on small screens */
+    .box-card { width: 100% !important; height: 40px; border-radius: 10px; }
     .box-title { font-size: 0.9rem; }
     
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -360,6 +366,12 @@ body, .font-helvetica {
     .footer-system { padding: 12px 0; }
     .slogan-gap { margin-bottom: -3vh; }
     .grid-top-margin { margin-top: 2vh; }
+}
+
+@media (max-width: 768px) {
+    .apple-accordion-content {
+        gap: 12px; /* Increased gap for easier tapping on mobile */
+    }
 }
 
 /* --- 10. SUBPAGE CONTAINER --- */
