@@ -61,11 +61,38 @@ import MainLayout from '../layouts/MainLayout.astro';
     .legal-content {
         max-width: 750px;
         margin: 0 auto;
+        padding: 0 24px; 
         color: var(--zinc-text);
         line-height: 1.7; 
         font-weight: 300;
         padding-bottom: 10vh;
         font-size: 1.05rem;
+        
+        /* --- NEW ALIGNMENT --- */
+        text-align: justify;
+        text-justify: inter-word; /* Ensures even distribution of space */
+    }
+
+    /* --- MOBILE RESPONSIVENESS --- */
+    @media (max-width: 768px) {
+        .static-title {
+            font-size: 2.2rem;
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .legal-content {
+            font-size: 1rem;
+            padding: 0 20px;
+            /* Optional: If justified looks too "gappy" on very small phones, 
+               you can switch it back to left on mobile only, but usually 
+               justify looks fine with inter-word. */
+            text-align: justify; 
+        }
+
+        .legal-heading {
+            font-size: 1.2rem;
+        }
     }
 
     section {
@@ -78,13 +105,14 @@ import MainLayout from '../layouts/MainLayout.astro';
         margin-bottom: 8px; 
         font-weight: 500;
         letter-spacing: 0.01em;
+        /* Headings usually look better left-aligned even if body is justified */
+        text-align: left; 
     }
 
     p {
         margin-bottom: 12px; 
     }
 
-    /* Styling the brand name to blend in with paragraph weight */
     .legal-content .font-baumans {
         font-size: 1.05em;
         color: inherit;
