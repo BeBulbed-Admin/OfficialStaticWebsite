@@ -1,11 +1,98 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 ---
-<MainLayout title="Privacy Policy" isStatic={true}>
+<MainLayout title="Terms of Use" isStatic={true}>
     <main class="static-page-container">
-        <h1 class="static-title font-baumans">Privacy Policy</h1>
-        <div style="max-width: 600px; color: var(--zinc-text); line-height: 1.8;">
-            <p>Your privacy is important to us...</p>
+        <h1 class="static-title font-baumans">Terms of Use</h1>
+        
+        <div class="legal-content">
+            <section>
+                <p>
+                    By entering the <span class="font-baumans"><span class="flip-b">B</span>eBulbed</span> 
+                    environment, you agree to engage with our research and ideas under the following 
+                    Laboratory Protocols. This space is dedicated to the world we want to see, and 
+                    your participation should reflect that intent.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="legal-heading">1. Laboratory Access</h2>
+                <p>
+                    This website is a digital extension of our research laboratory. Access is granted 
+                    for personal, non-commercial exploration of our concepts and designs. Any 
+                    unauthorized attempt to disrupt the stability of this environment is strictly 
+                    prohibited.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="legal-heading">2. Intellectual Boundaries</h2>
+                <p>
+                    The concepts, designs, and sparks of ideas found here are the intellectual 
+                    property of <span class="font-baumans"><span class="flip-b">B</span>eBulbed</span>. 
+                    You are encouraged to be inspired by them, but you may not claim, redistribute, 
+                    or monetize our research without explicit written permission.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="legal-heading">3. Experimental Nature</h2>
+                <p>
+                    Because the world isn’t finished yet, our work is in a constant state of 
+                    evolution. Everything presented here is "experimental." We provide this 
+                    information on an "as-is" basis and make no warranties regarding the 
+                    completeness or permanence of any specific project or idea.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="legal-heading">4. Protocol Evolution</h2>
+                <p>
+                    Our protocols may change as our research moves forward. By continuing to 
+                    access the lab, you accept the current version of these terms. We recommend 
+                    checking this space occasionally to stay aligned with our evolving standards.
+                </p>
+            </section>
         </div>
     </main>
 </MainLayout>
+
+<style>
+    .legal-content {
+        max-width: 750px;
+        margin: 0 auto;
+        color: var(--zinc-text);
+        line-height: 1.7; 
+        font-weight: 300;
+        padding-bottom: 10vh;
+        font-size: 1.05rem;
+    }
+
+    section {
+        margin-bottom: 32px; 
+    }
+
+    .legal-heading {
+        color: #fff;
+        font-size: 1.3rem;
+        margin-bottom: 8px; 
+        font-weight: 500;
+        letter-spacing: 0.01em;
+    }
+
+    p {
+        margin-bottom: 12px; 
+    }
+
+    /* Styling the brand name to blend in with paragraph weight */
+    .legal-content .font-baumans {
+        font-size: 1.05em;
+        color: inherit;
+        font-weight: 300;
+    }
+
+    .flip-b {
+        display: inline-block;
+        transform: scaleX(-1);
+    }
+</style>

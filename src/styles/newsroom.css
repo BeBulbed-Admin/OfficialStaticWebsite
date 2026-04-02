@@ -1,24 +1,110 @@
-/* --- NEWSROOM SPECIFIC STYLES --- */
+/* --- 1. GLOBAL STABILIZATION --- */
+html {
+    /* Keeps the scrollbar gutter present so the page doesn't 'jump' horizontally */
+    overflow-y: scroll; 
+}
+
+/* --- 2. NEWSROOM SPECIFIC STYLES --- */
 .news-grid {
     width: 100%;
     max-width: 850px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     padding: 0 25px 15vh 25px;
 }
 
 .news-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border); /* var(--border) is inherited from ../main.css */
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03); 
+    border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 30px;
+    padding: 40px;
     text-decoration: none;
     color: #fff;
-    transition: all var(--transition-speed) ease;
+    
+    /* STABILIZER: Tells the browser this box's layout is independent */
+    contain: layout; 
+    /* STABILIZER: Uses GPU to render, preventing sub-pixel 'vibration' */
+    transform: translateZ(0); 
+    
+    transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .news-card:hover { 
     background: rgba(255, 255, 255, 0.06); 
-    transform: translateY(-3px); 
+    transform: translateY(-3px) translateZ(0); 
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.news-date { 
+    color: var(--zinc-text); 
+    font-size: 0.95rem; 
+    display: block; 
+    margin-bottom: 10px; 
+}
+
+.news-headline, .news-excerpt { 
+    /* STABILIZER: Sharpens text and prevents shifting during font-load */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    transform: translateZ(0); 
+}
+
+.news-headline { 
+    font-size: 1.8rem;
+    margin-bottom: 20px; 
+    font-weight: 500; 
+    color: #fff;
+}
+
+/* --- 3. BRAND TYPOGRAPHY STABILIZERS --- */
+.font-baumans {
+    /* Locks the width calculation so it doesn't 'nudge' the text around it */
+    display: inline-block;
+    font-display: swap; 
+}
+
+.flip-b {
+    display: inline-block;
+    transform: scaleX(-1);
+    /* Prevents the flipped letter from 'flickering' on refresh */
+    backface-visibility: hidden; 
+}
+
+.news-headline .font-baumans {
+    font-size: 1.1em;
+    letter-spacing: 0.02em;
+}
+
+.news-excerpt { 
+    color: var(--zinc-text); 
+    line-height: 1.7; 
+    font-weight: 300; 
+    font-size: 1.1rem;
+}
+
+.news-excerpt .font-baumans {
+    font-size: 1.05em; 
+    color: inherit;    
+    font-weight: 300;  
+    letter-spacing: 0.01em;
+}
+
+/* --- 4. MOBILE REFINEMENT --- */
+@media (max-width: 768px) {
+    .news-grid {
+        padding: 0 15px 10vh 15px;
+    }
+    .news-card {
+        padding: 30px;
+        border-radius: 12px;
+    }
+    .news-headline { 
+        font-size: 1.5rem; 
+    }
+    .news-excerpt { 
+        font-size: 1rem; 
+    }
 }

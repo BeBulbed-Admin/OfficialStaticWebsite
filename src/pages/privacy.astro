@@ -4,8 +4,93 @@ import MainLayout from '../layouts/MainLayout.astro';
 <MainLayout title="Privacy Policy" isStatic={true}>
     <main class="static-page-container">
         <h1 class="static-title font-baumans">Privacy Policy</h1>
-        <div style="max-width: 600px; color: var(--zinc-text); line-height: 1.8;">
-            <p>Your privacy is important to us...</p>
+        
+        <div class="legal-content">
+            <section>
+                <p>
+                    At <span class="font-baumans"><span class="flip-b">B</span>eBulbed</span>, we believe that privacy 
+                    is the foundation of creative freedom. Our laboratory environment is designed to be a 
+                    secure space for exploration, where your presence is respected and your data is not a 
+                    commodity.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="legal-heading">1. The Principle of Observation</h2>
+                <p>
+                    We do not "collect" users; we observe interactions to ensure the stability of our 
+                    environment. Any technical data—such as your device type or session duration—is 
+                    treated as environmental noise: it is analyzed to improve the lab, then discarded.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="legal-heading">2. Intellectual Boundary</h2>
+                <p>
+                    Your visit is a private engagement. We do not use third-party tracking scripts, 
+                    advertising pixels, or external analytics engines[cite: 1, 3]. Because we do not invite 
+                    third-party services into our space, your data never leaves this domain.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="legal-heading">3. Zero Exchange</h2>
+                <p>
+                    The "world we want to see" does not include the trading of personal information. 
+                    We do not sell, share, or bridge your data with any outside entity. Our 
+                    infrastructure is built to be a closed loop, ensuring that your intellectual 
+                    footprint remains yours alone.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="legal-heading">4. Integrity of Protocols</h2>
+                <p>
+                    As our research evolves, so will our protocols. We reserve the right to refine 
+                    these standards as we move from the initial spark toward new realities. We 
+                    encourage you to revisit this space to stay informed on how we protect the lab[cite: 3].
+                </p>
+            </section>
         </div>
     </main>
 </MainLayout>
+
+<style>
+    .legal-content {
+        max-width: 750px;
+        margin: 0 auto;
+        color: var(--zinc-text);
+        line-height: 1.7; 
+        font-weight: 300;
+        padding-bottom: 10vh;
+        font-size: 1.05rem;
+    }
+
+    section {
+        margin-bottom: 32px; /* Tightened section distance */
+    }
+
+    .legal-heading {
+        color: #fff;
+        font-size: 1.3rem;
+        margin-bottom: 8px; /* Tightened heading-to-paragraph distance */
+        font-weight: 500;
+        letter-spacing: 0.01em;
+    }
+
+    p {
+        margin-bottom: 12px; 
+    }
+
+    /* Styling the brand name to match your header style */
+    .legal-content .font-baumans {
+        font-size: 1.05em;
+        color: inherit;
+        font-weight: 300;
+    }
+
+    .flip-b {
+        display: inline-block;
+        transform: scaleX(-1); /* Correctly mirrors the 'B' as seen in your header  */
+    }
+</style>
