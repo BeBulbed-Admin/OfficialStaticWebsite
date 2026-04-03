@@ -2,7 +2,7 @@
 
 .static-page-container {
     /* Clears the BB logo in the navigation */
-    padding-top: 80px; 
+    padding-top: 100px; 
     background-color: var(--bg);
     transition: var(--theme-transition);
 }

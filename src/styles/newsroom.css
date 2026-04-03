@@ -4,7 +4,7 @@ html {
 }
 
 .static-page-container {
-    padding-top: 80px; 
+    padding-top: 100px; 
     background-color: var(--bg);
     transition: var(--theme-transition);
 }

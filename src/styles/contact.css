@@ -1,6 +1,6 @@
 /* --- 1. GLOBAL & CONTAINER STABILIZATION --- */
 .static-page-container {
-    padding-top: 80px; 
+    padding-top: 100px; 
     background-color: var(--bg); /* Respects the DNA background */
     transition: var(--theme-transition);
 }
