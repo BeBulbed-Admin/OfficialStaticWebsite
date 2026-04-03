@@ -54,7 +54,8 @@ import MainLayout from '../layouts/MainLayout.astro';
     </main>
 
     <div class="scroll-prompt">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+        {/* Changed stroke from "white" to "currentColor" so it follows the theme variable */}
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
         </svg>
     </div>

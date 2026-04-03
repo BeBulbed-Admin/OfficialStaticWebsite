@@ -3,6 +3,8 @@
 .static-page-container {
     /* Clears the BB logo in the navigation */
     padding-top: 80px; 
+    background-color: var(--bg);
+    transition: var(--theme-transition);
 }
 
 .static-title {
@@ -10,19 +12,21 @@
     margin-bottom: 40px;
     font-size: 3rem;
     text-align: center;
-    color: #fff;
+    color: var(--text-primary); /* Swaps automatically */
     line-height: 1;
+    transition: var(--theme-transition);
 }
 
 .legal-content {
     max-width: 750px;
     margin: 0 auto;
     padding: 0 24px;
-    color: var(--zinc-text);
+    color: var(--text-secondary); /* Uses the Zinc/Gray variable */
     line-height: 1.7;
     font-weight: 300;
     padding-bottom: 10vh;
     font-size: 1.05rem;
+    transition: var(--theme-transition);
     
     /* Clean block edges */
     text-align: justify;
@@ -34,12 +38,13 @@ section {
 }
 
 .legal-heading {
-    color: #fff;
+    color: var(--text-primary); /* Swaps automatically */
     font-size: 1.3rem;
     margin-bottom: 8px;
     font-weight: 500;
     letter-spacing: 0.01em;
     text-align: left;
+    transition: var(--theme-transition);
 }
 
 p {

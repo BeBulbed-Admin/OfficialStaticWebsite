@@ -33,10 +33,18 @@
 </footer>
 
 <style>
-    /* Ensures the brand font in the footer matches the surrounding text style */
+    /* Laboratory Theme Integration */
+    .footer-system {
+        transition: var(--theme-transition);
+    }
+
+    .footer-text, .footer-link {
+        transition: var(--theme-transition);
+    }
+
     .footer-text .font-baumans {
         font-size: 1.1em;
-        color: inherit; /* Matches the zinc-text color of the footer */
+        color: inherit; 
         font-weight: 300;
         display: inline-block;
     }
@@ -44,5 +52,11 @@
     .flip-b {
         display: inline-block;
         transform: scaleX(-1);
+    }
+
+    /* Chevron respects the zinc-text variable automatically via stroke="currentColor" */
+    .apple-chevron {
+        color: var(--text-secondary);
+        transition: transform 0.4s ease, color var(--theme-speed) ease;
     }
 </style>

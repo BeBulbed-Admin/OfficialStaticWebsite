@@ -1,22 +1,22 @@
 /* --- 1. GLOBAL & CONTAINER STABILIZATION --- */
 html {
-    /* Keeps the scrollbar gutter present so the page doesn't 'jump' horizontally */
     overflow-y: scroll; 
 }
 
 .static-page-container {
-    /* Perfectly clears the "BB" logo in the nav across all subpages */
     padding-top: 80px; 
+    background-color: var(--bg);
+    transition: var(--theme-transition);
 }
 
 .static-title {
-    /* Zeroed out to sit flush with the top-level container padding */
     margin-top: 0;
     margin-bottom: 40px;
     font-size: 3rem;
     text-align: center;
-    color: #fff;
+    color: var(--text-primary);
     line-height: 1;
+    transition: var(--theme-transition);
 }
 
 /* --- 2. NEWSROOM SPECIFIC STYLES --- */
@@ -28,34 +28,33 @@ html {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    /* Matches the horizontal "breathing room" of the legal pages */
     padding: 0 24px 15vh 24px; 
 }
 
 .news-card {
     width: 100%;
-    background: rgba(255, 255, 255, 0.03); 
-    border: 1px solid var(--border);
+    background: var(--card-bg); 
+    border: 1px solid var(--card-border);
     border-radius: 14px;
     padding: 40px;
     text-decoration: none;
-    color: #fff;
+    color: var(--text-primary);
     
     contain: layout; 
     transform: translateZ(0); 
     
-    /* Matches the premium lift-speed of the "Contact" button */
-    transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+    /* Tied to theme engine speed */
+    transition: all var(--theme-speed) cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .news-card:hover { 
-    background: rgba(255, 255, 255, 0.06); 
+    background: var(--card-hover-bg); 
     transform: translateY(-3px) translateZ(0); 
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--card-hover-border);
 }
 
 .news-date { 
-    color: var(--zinc-text); 
+    color: var(--text-secondary); 
     font-size: 0.95rem; 
     display: block; 
     margin-bottom: 10px; 
@@ -65,18 +64,17 @@ html {
     font-size: 1.8rem;
     margin-bottom: 20px; 
     font-weight: 500; 
-    color: #fff;
+    color: var(--text-primary);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
 }
 
 .news-excerpt { 
-    color: var(--zinc-text); 
+    color: var(--text-secondary); 
     line-height: 1.7; 
     font-weight: 300; 
     font-size: 1.1rem;
     
-    /* --- LABORATORY PROTOCOL ALIGNMENT --- */
     text-align: justify;
     text-justify: inter-word;
     
@@ -124,7 +122,7 @@ html {
     }
 
     .news-card {
-        padding: 30px; /* Generous internal padding for premium feel */
+        padding: 30px; 
         border-radius: 12px;
     }
 
@@ -134,8 +132,6 @@ html {
 
     .news-excerpt { 
         font-size: 1rem;
-        
-        /* Consistency: Ensuring inter-word justification on small screens */
         text-align: justify;
         text-justify: inter-word; 
     }

@@ -1,4 +1,6 @@
 ---
+/* 1. Import the Theme DNA first, then the Layout Bones */
+import '../styles/theme.css';
 import '../styles/main.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -10,10 +12,26 @@ const { title, isStatic = false, isHome = false } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BeBulbed</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link href="https://fonts.googleapis.com/css2?family=Baumans&display=swap" rel="stylesheet" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    
+    {/* Added :wght@400 and kept display=block to ensure the logo font is locked-in on load */}
+    <link href="https://fonts.googleapis.com/css2?family=Baumans:wght@400&display=block" rel="stylesheet" />
 </head>
-<body class="bg-[#0d0d0d] text-white overflow-x-hidden font-helvetica">
+
+{/* Removed 'bg-[#0d0d0d]' and 'text-white' so that theme.css 
+  can switch the colors automatically based on system settings.
+*/}
+<body class="overflow-x-hidden font-helvetica">
     <Header isHome={isHome} isStatic={isStatic} />
     <slot />
     <Footer />
