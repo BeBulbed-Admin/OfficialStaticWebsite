@@ -24,13 +24,9 @@ const { title, isStatic = false, isHome = false } = Astro.props;
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
     
-    {/* Added :wght@400 and kept display=block to ensure the logo font is locked-in on load */}
     <link href="https://fonts.googleapis.com/css2?family=Baumans:wght@400&display=block" rel="stylesheet" />
 </head>
 
-{/* Removed 'bg-[#0d0d0d]' and 'text-white' so that theme.css 
-  can switch the colors automatically based on system settings.
-*/}
 <body class="overflow-x-hidden font-helvetica">
     <Header isHome={isHome} isStatic={isStatic} />
     <slot />
