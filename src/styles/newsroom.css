@@ -1,18 +1,35 @@
-/* --- 1. GLOBAL STABILIZATION --- */
+/* --- 1. GLOBAL & CONTAINER STABILIZATION --- */
 html {
     /* Keeps the scrollbar gutter present so the page doesn't 'jump' horizontally */
     overflow-y: scroll; 
+}
+
+.static-page-container {
+    /* Perfectly clears the "BB" logo in the nav across all subpages */
+    padding-top: 80px; 
+}
+
+.static-title {
+    /* Zeroed out to sit flush with the top-level container padding */
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-size: 3rem;
+    text-align: center;
+    color: #fff;
+    line-height: 1;
 }
 
 /* --- 2. NEWSROOM SPECIFIC STYLES --- */
 .news-grid {
     width: 100%;
     max-width: 850px;
+    margin: 0 auto; 
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    padding: 0 25px 15vh 25px;
+    /* Matches the horizontal "breathing room" of the legal pages */
+    padding: 0 24px 15vh 24px; 
 }
 
 .news-card {
@@ -24,11 +41,10 @@ html {
     text-decoration: none;
     color: #fff;
     
-    /* STABILIZER: Tells the browser this box's layout is independent */
     contain: layout; 
-    /* STABILIZER: Uses GPU to render, preventing sub-pixel 'vibration' */
     transform: translateZ(0); 
     
+    /* Matches the premium lift-speed of the "Contact" button */
     transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -45,37 +61,13 @@ html {
     margin-bottom: 10px; 
 }
 
-.news-headline, .news-excerpt { 
-    /* STABILIZER: Sharpens text and prevents shifting during font-load */
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    transform: translateZ(0); 
-}
-
 .news-headline { 
     font-size: 1.8rem;
     margin-bottom: 20px; 
     font-weight: 500; 
     color: #fff;
-}
-
-/* --- 3. BRAND TYPOGRAPHY STABILIZERS --- */
-.font-baumans {
-    /* Locks the width calculation so it doesn't 'nudge' the text around it */
-    display: inline-block;
-    font-display: swap; 
-}
-
-.flip-b {
-    display: inline-block;
-    transform: scaleX(-1);
-    /* Prevents the flipped letter from 'flickering' on refresh */
-    backface-visibility: hidden; 
-}
-
-.news-headline .font-baumans {
-    font-size: 1.1em;
-    letter-spacing: 0.02em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
 .news-excerpt { 
@@ -83,6 +75,29 @@ html {
     line-height: 1.7; 
     font-weight: 300; 
     font-size: 1.1rem;
+    
+    /* --- LABORATORY PROTOCOL ALIGNMENT --- */
+    text-align: justify;
+    text-justify: inter-word;
+    
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- 3. BRAND TYPOGRAPHY --- */
+.font-baumans {
+    display: inline-block;
+}
+
+.flip-b {
+    display: inline-block;
+    transform: scaleX(-1);
+    backface-visibility: hidden; 
+}
+
+.news-headline .font-baumans {
+    font-size: 1.1em;
+    letter-spacing: 0.02em;
 }
 
 .news-excerpt .font-baumans {
@@ -94,17 +109,34 @@ html {
 
 /* --- 4. MOBILE REFINEMENT --- */
 @media (max-width: 768px) {
-    .news-grid {
-        padding: 0 15px 10vh 15px;
+    .static-page-container {
+        /* Pushes title down enough to clear the mobile navigation */
+        padding-top: 60px; 
     }
+    
+    .static-title {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+
+    .news-grid {
+        padding: 0 20px 10vh 20px;
+    }
+
     .news-card {
-        padding: 30px;
+        padding: 30px; /* Generous internal padding for premium feel */
         border-radius: 12px;
     }
+
     .news-headline { 
         font-size: 1.5rem; 
     }
+
     .news-excerpt { 
-        font-size: 1rem; 
+        font-size: 1rem;
+        
+        /* Consistency: Ensuring inter-word justification on small screens */
+        text-align: justify;
+        text-justify: inter-word; 
     }
 }

@@ -1,0 +1,79 @@
+/* src/styles/legal.css */
+
+.static-page-container {
+    /* Clears the BB logo in the navigation */
+    padding-top: 80px; 
+}
+
+.static-title {
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-size: 3rem;
+    text-align: center;
+    color: #fff;
+    line-height: 1;
+}
+
+.legal-content {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 0 24px;
+    color: var(--zinc-text);
+    line-height: 1.7;
+    font-weight: 300;
+    padding-bottom: 10vh;
+    font-size: 1.05rem;
+    
+    /* Clean block edges */
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+section {
+    margin-bottom: 32px;
+}
+
+.legal-heading {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-align: left;
+}
+
+p {
+    margin-bottom: 12px;
+}
+
+.legal-content .font-baumans {
+    font-size: 1.05em;
+    color: inherit;
+    font-weight: 300;
+}
+
+.flip-b {
+    display: inline-block;
+    transform: scaleX(-1);
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .static-page-container {
+        padding-top: 60px;
+    }
+
+    .static-title {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+
+    .legal-content {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+
+    .legal-heading {
+        font-size: 1.2rem;
+    }
+}

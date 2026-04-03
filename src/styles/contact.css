@@ -1,41 +1,77 @@
-/* --- CONTACT PAGE SPECIFIC STYLES --- */
+/* --- 1. GLOBAL & CONTAINER STABILIZATION --- */
+.static-page-container {
+    padding-top: 80px; 
+}
 
+.static-title {
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-size: 3rem;
+    text-align: center;
+    color: #fff;
+    line-height: 1;
+}
+
+/* --- 2. CONTACT PAGE SPECIFIC STYLES --- */
 .contact-wrapper {
     width: 100%;
     max-width: 600px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 25px;
-    padding: 0 25px 15vh 25px;
+    padding: 0 24px 15vh 24px;
     text-align: center;
 }
 
 .contact-message {
     font-size: 1.1rem;
     color: var(--zinc-text);
-    line-height: 1.6;
+    line-height: 1.7; 
     font-weight: 300;
 }
 
 .btn-email {
-    background: #fff;
-    color: #000;
+    /* --- THE "ELEMENT" STYLE UPDATE --- */
+    background: rgba(255, 255, 255, 0.05); /* Subtle dark fill like the main elements */
+    color: #fff; /* Changed from black to white */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Matching the element/card border */
+    backdrop-filter: blur(10px); /* Gives it that premium "glass" feel */
+    
     text-decoration: none;
     border-radius: 12px;
-    padding: 16px 30px;
+    padding: 16px 36px;
     font-size: 1.1rem;
-    font-weight: 500;
-    transition: all var(--transition-speed) ease;
+    font-weight: 400;
+    transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
     display: inline-block;
+    margin-top: 10px;
 }
 
 .btn-email:hover {
-    transform: translateY(-2px);
-    background: #e0e0e0;
+    /* Lift and glow effect matching the 'Spark' hover */
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
 }
 
+/* --- 3. MOBILE REFINEMENT --- */
 @media (max-width: 768px) {
+    .static-page-container {
+        padding-top: 60px;
+    }
+
+    .static-title {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+
+    .contact-wrapper {
+        padding: 0 20px 10vh 20px;
+    }
+
     .contact-message {
         font-size: 1rem;
     }
