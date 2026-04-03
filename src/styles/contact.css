@@ -65,7 +65,7 @@
 /* --- 3. MOBILE REFINEMENT --- */
 @media (max-width: 768px) {
     .static-page-container {
-        padding-top: 15px; /* Eliminated the huge gap */
+        padding-top: 90px; /* Eliminated the huge gap */
     }
     
     .static-title {

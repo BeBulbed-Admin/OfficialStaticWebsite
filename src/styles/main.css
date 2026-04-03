@@ -453,7 +453,7 @@ body, .font-helvetica {
 
     /* Fixed the "Huge Gap" at the top of subpages */
     .static-page-container {
-        padding-top: 15px !important; 
+        padding-top: 90px !important; 
     }
     
     .subpage-container {
