@@ -327,23 +327,6 @@ body, .font-helvetica {
     animation-range: 0s, 0px 200px; 
 }
 
-/* --- 9. MOBILE REFINEMENT --- */
-@media (max-width: 768px) {
-    .home-nav { height: 70px; }
-    @keyframes logoShrink { 
-        to { 
-            transform: translateY(calc(-50vh + 35px)); 
-            font-size: 2.4rem; 
-        } 
-    }
-    .content-section { padding: 100vh 20px 5vh 20px; }
-    .body-slogan { font-size: 1.3rem !important; }
-    .body-para { font-size: 1.1rem !important; }
-    .t-grid-container { max-width: 80%; }    
-    .box-card { height: 40px; }
-    .footer-bottom { flex-direction: column; align-items: flex-start; }
-}
-
 /* --- 10. SUBPAGE CONTAINER --- */
 .subpage-container {
     position: relative;
@@ -428,4 +411,60 @@ body, .font-helvetica {
     font-size: clamp(2.5rem, 6vw, 4rem);
     color: var(--text-primary);
     margin-bottom: 40px;
+}
+
+/* --- 9. MOBILE REFINEMENT (CALIBRATED & PLACED AT BOTTOM) --- */
+@media (max-width: 768px) {
+    .home-nav { height: 70px; }
+    
+    @keyframes logoShrink { 
+        to { 
+            transform: translateY(calc(-50vh + 35px)); 
+            font-size: 2.4rem; 
+        } 
+    }
+
+    /* REDUCED GAP: Bringing the content closer to the hero on mobile */
+    .content-section { 
+        gap: 4vh; 
+        padding: 100vh 20px 5vh 20px; 
+    }
+
+    .body-slogan { font-size: 1.2rem !important; }
+    .body-para { font-size: 1.05rem !important; }
+
+    /* BUTTONS: Forcing 1-by-1 vertical stack */
+    .t-grid-container { 
+        max-width: 100%; 
+        gap: 12px; 
+    }    
+    .t-row-top { 
+        width: 100%; 
+    }    
+    .t-row-bottom { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 12px; 
+    }    
+    .box-card { 
+        width: 100% !important; 
+        height: 48px; 
+    }
+
+    /* Fixed the "Huge Gap" at the top of subpages */
+    .static-page-container {
+        padding-top: 15px !important; 
+    }
+    
+    .subpage-container {
+        padding-top: 12vh !important; 
+    }
+
+    .static-title {
+        font-size: 2.2rem;
+        margin-top: 0; 
+        margin-bottom: 25px;
+    }
+
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
 }
