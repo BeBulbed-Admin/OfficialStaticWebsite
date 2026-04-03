@@ -110,12 +110,12 @@ html {
 /* --- 4. MOBILE REFINEMENT --- */
 @media (max-width: 768px) {
     .static-page-container {
-        /* Pushes title down enough to clear the mobile navigation */
-        padding-top: 60px; 
+        padding-top: 100px; 
     }
     
     .static-title {
         font-size: 2.2rem;
+        margin-top: 10px;
         margin-bottom: 30px;
     }
 
