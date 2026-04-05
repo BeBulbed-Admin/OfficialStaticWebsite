@@ -1,8 +1,14 @@
 /* --- 1. GLOBAL & CONTAINER STABILIZATION --- */
 .static-page-container {
     padding-top: 100px; 
-    background-color: var(--bg); /* Respects the DNA background */
-    transition: var(--theme-transition);
+    background-color: var(--bg);
+    
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+}
+
+.static-page-container.is-ready {
+    opacity: 1;
 }
 
 .static-title {
@@ -10,7 +16,7 @@
     margin-bottom: 40px;
     font-size: 3rem;
     text-align: center;
-    color: var(--text-primary); /* Swaps White/Black automatically */
+    color: var(--text-primary);
     line-height: 1;
     transition: var(--theme-transition);
 }
@@ -30,14 +36,13 @@
 
 .contact-message {
     font-size: 1.1rem;
-    color: var(--text-secondary); /* Uses the Zinc/Gray variable */
+    color: var(--text-secondary);
     line-height: 1.7; 
     font-weight: 300;
     transition: var(--theme-transition);
 }
 
 .btn-email {
-    /* Uses the same "DNA" as the homepage grid buttons */
     background: var(--card-bg); 
     color: var(--text-primary); 
     border: 1px solid var(--card-border); 
@@ -54,23 +59,26 @@
 }
 
 .btn-email:hover {
-    /* Lift and glow effect matching the Laboratory style */
     transform: translateY(-3px);
     background: var(--card-hover-bg);
     border-color: var(--card-hover-border);
-    /* Subtle shadow that disappears in light mode for a cleaner look */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
 /* --- 3. MOBILE REFINEMENT --- */
 @media (max-width: 768px) {
     .static-page-container {
-        padding-top: 90px; /* Eliminated the huge gap */
+        padding-top: 90px;
+        opacity: 0; 
+    }
+
+    .static-page-container.is-ready {
+        opacity: 1;
     }
     
     .static-title {
         font-size: 2.2rem;
-        margin-top: 0; /* Pulled title up to meet the nav bar */
+        margin-top: 0;
         margin-bottom: 30px;
     }
 

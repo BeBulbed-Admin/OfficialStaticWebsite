@@ -4,7 +4,28 @@ import '../styles/legal.css';
 ---
 
 <MainLayout title="Terms of Use" isStatic={true}>
-    <main class="static-page-container">
+    <script is:inline>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const scrollPos = sessionStorage.getItem('bebulbed-scroll-terms') || 0;
+            
+            requestAnimationFrame(() => {
+                window.scrollTo(0, scrollPos);
+                requestAnimationFrame(() => {
+                    document.getElementById("terms-container")?.classList.add("is-ready");
+                });
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            sessionStorage.setItem('bebulbed-scroll-terms', window.scrollY);
+        });
+    </script>
+
+    <main class="static-page-container" id="terms-container">
         <h1 class="static-title font-baumans">Terms of Use</h1>
         
         <div class="legal-content">

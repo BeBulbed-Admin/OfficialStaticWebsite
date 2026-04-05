@@ -3,7 +3,28 @@ import MainLayout from '../layouts/MainLayout.astro';
 import '../styles/contact.css'; 
 ---
 <MainLayout title="Contact Us" isStatic={true}>
-    <main class="static-page-container">
+    <script is:inline>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const scrollPos = sessionStorage.getItem('bebulbed-scroll-contact') || 0;
+            
+            requestAnimationFrame(() => {
+                window.scrollTo(0, scrollPos);
+                requestAnimationFrame(() => {
+                    document.getElementById("contact-container")?.classList.add("is-ready");
+                });
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            sessionStorage.setItem('bebulbed-scroll-contact', window.scrollY);
+        });
+    </script>
+
+    <main class="static-page-container" id="contact-container">
         <h1 class="static-title font-baumans">Contact Us</h1>
         <div class="contact-wrapper">
              <p class="contact-message">Get in touch with us directly.</p>

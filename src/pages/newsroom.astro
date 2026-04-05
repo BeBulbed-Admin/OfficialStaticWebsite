@@ -4,7 +4,28 @@ import '../styles/newsroom.css';
 ---
 
 <MainLayout title="Newsroom" isStatic={true}>
-    <main class="static-page-container">
+    <script is:inline>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const scrollPos = sessionStorage.getItem('bebulbed-scroll-newsroom') || 0;
+            
+            requestAnimationFrame(() => {
+                window.scrollTo(0, scrollPos);
+                requestAnimationFrame(() => {
+                    document.getElementById("newsroom-container")?.classList.add("is-ready");
+                });
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            sessionStorage.setItem('bebulbed-scroll-newsroom', window.scrollY);
+        });
+    </script>
+
+    <main class="static-page-container" id="newsroom-container">
         <h1 class="static-title font-baumans">Newsroom</h1>
         
         <div class="news-grid">

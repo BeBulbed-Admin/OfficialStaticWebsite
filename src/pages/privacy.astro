@@ -4,7 +4,28 @@ import '../styles/legal.css';
 ---
 
 <MainLayout title="Privacy Policy" isStatic={true}>
-    <main class="static-page-container">
+    <script is:inline>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const scrollPos = sessionStorage.getItem('bebulbed-scroll-privacy') || 0;
+            
+            requestAnimationFrame(() => {
+                window.scrollTo(0, scrollPos);
+                requestAnimationFrame(() => {
+                    document.getElementById("privacy-container")?.classList.add("is-ready");
+                });
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            sessionStorage.setItem('bebulbed-scroll-privacy', window.scrollY);
+        });
+    </script>
+
+    <main class="static-page-container" id="privacy-container">
         <h1 class="static-title font-baumans">Privacy Policy</h1>
         
         <div class="legal-content">

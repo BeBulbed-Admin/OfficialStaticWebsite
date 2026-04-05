@@ -10,21 +10,31 @@ import MainLayout from '../layouts/MainLayout.astro';
         </h1>
     </header>
 
-    {/* The Referee: Forces the browser to finish scroll math before showing the logo */}
+    {/* The Referee: Forces the browser to finish scroll math before showing any content */}
     <script is:inline>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
-            // Double requestAnimationFrame ensures the browser has painted the initial frame 
-            // and restored the scroll position before we trigger the fade-in.
+            const scrollPos = sessionStorage.getItem('bebulbed-scroll') || 0;
+            
             requestAnimationFrame(() => {
+                window.scrollTo(0, scrollPos);
+
                 requestAnimationFrame(() => {
-                    const hero = document.getElementById("hero-container");
-                    if (hero) hero.classList.add("is-ready");
+                    document.getElementById("hero-container")?.classList.add("is-ready");
+                    document.getElementById("content-section")?.classList.add("is-ready");
                 });
             });
         });
+
+        window.addEventListener('scroll', () => {
+            sessionStorage.setItem('bebulbed-scroll', window.scrollY);
+        });
     </script>
 
-    <main class="content-section">
+    <main class="content-section" id="content-section">
         <div class="reveal-container slogan-gap">
             <h2 class="body-slogan">"Inspired by the world we live in.</h2>
         </div>

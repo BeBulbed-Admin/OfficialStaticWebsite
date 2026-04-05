@@ -4,7 +4,6 @@
     padding: 0; 
     box-sizing: border-box; 
     cursor: default; 
-    /* Global Smoothing: Applied to everything at once to stop the 'shake' */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -28,18 +27,15 @@ body, .font-helvetica {
     justify-content: center;
     gap: 0; 
     font-kerning: none; 
-    font-weight: 400; /* Locked for consistency across all tags */
+    font-weight: 400; 
 }
 
-/* 2.1. Initial state of the spacer */
 .logo-spacer {
     display: inline-block;
     width: 2px; 
-    /* Prepare the GPU for the animation to prevent stuttering */
     will-change: width, margin-left; 
 }
 
-/* 2.2. The Magnetic Pull */
 @keyframes spacerCollapse {
     from { width: 2px; margin-left: 0; }
     to { 
@@ -48,14 +44,12 @@ body, .font-helvetica {
     }
 }
 
-/* 2.3. Apply magnetic pull to the Hero Logo on scroll */
 .hero-logo .logo-spacer {
     animation: spacerCollapse linear both;
     animation-timeline: scroll();
     animation-range: 0px 300px; 
 }
 
-/* 2.4. Force the tight logo look for Nav bars */
 .nav-logo-link .logo-spacer, 
 .nav-logo-center .logo-spacer {
     width: 0;
@@ -108,12 +102,10 @@ body, .font-helvetica {
     z-index: 1000; 
     pointer-events: none;    
     
-    /* THE BULLETPROOF FIX: Start completely hidden */
     opacity: 0;
     transition: opacity 0.3s ease-out;
 }
 
-/* JavaScript will add this class only AFTER the scroll math is done */
 .logo-hero-container.is-ready {
     opacity: 1;
 }
@@ -152,18 +144,24 @@ body, .font-helvetica {
     flex-direction: column;
     align-items: center;
     gap: 5vh; 
-    padding: 100vh 20px 5vh 20px; 
+    padding: 60vh 20px 15vh 20px; 
     position: relative;
     z-index: 400;
 
     opacity: 0;
+    transition: opacity 0.4s ease-out;
+}
+
+.content-section.is-ready {
+    opacity: 1;
     animation: contentInitialFade linear both;
     animation-timeline: scroll();
     animation-range: 100px 300px;
 }
 
 @keyframes contentInitialFade {
-    to { opacity: 1; }
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 .reveal-container {
@@ -198,13 +196,8 @@ body, .font-helvetica {
     text-align: center;
 }
 
-.slogan-gap {
-    margin-bottom: -3.5vh; 
-}
-
-.grid-top-margin {
-    margin-top: 0vh; 
-}
+.slogan-gap { margin-bottom: -3.5vh; }
+.grid-top-margin { margin-top: 0vh; }
 
 /* --- 6. GRID BUTTONS --- */
 .t-grid-container {
@@ -315,7 +308,6 @@ body, .font-helvetica {
 }
 
 .footer-link:hover { color: var(--text-primary); }
-
 .footer-divider {
     color: var(--border);
     font-size: 11px;
@@ -421,7 +413,7 @@ body, .font-helvetica {
     margin-bottom: 40px;
 }
 
-/* --- 9. MOBILE REFINEMENT (CALIBRATED & PLACED AT BOTTOM) --- */
+/* --- 9. MOBILE REFINEMENT --- */
 @media (max-width: 768px) {
     .home-nav { height: 70px; }
     
@@ -432,36 +424,31 @@ body, .font-helvetica {
         } 
     }
 
-    /* REDUCED GAP: Bringing the content closer to the hero on mobile */
     .content-section { 
-        gap: 3vh; 
-        padding: 100vh 20px 5vh 20px; 
+        gap: 4vh; 
+        padding: 55vh 20px 15vh 20px; 
+        opacity: 0; 
+    }
+
+    .content-section.is-ready {
+        opacity: 1;
     }
 
     .body-slogan { font-size: 1.2rem !important; }
     .body-para { font-size: 1.05rem !important; }
 
-    /* BUTTONS: Forcing 1-by-1 vertical stack */
     .t-grid-container { 
         max-width: 100%; 
         gap: 12px; 
     }    
-    .t-row-top { 
-        width: 100%; 
-    }    
+    .t-row-top { width: 100%; }    
     .box-card { 
         width: 100% !important; 
         height: 48px; 
     }
 
-    /* Fixed the "Huge Gap" at the top of subpages */
-    .static-page-container {
-        padding-top: 90px !important; 
-    }
-    
-    .subpage-container {
-        padding-top: 12vh !important; 
-    }
+    .static-page-container { padding-top: 90px !important; }
+    .subpage-container { padding-top: 12vh !important; }
 
     .static-title {
         font-size: 2.2rem;
