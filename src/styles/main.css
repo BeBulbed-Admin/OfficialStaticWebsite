@@ -426,7 +426,7 @@ body, .font-helvetica {
 
     .content-section { 
         gap: 4vh; 
-        padding: 55vh 20px 15vh 20px; 
+        padding: 55vh 20px 5vh 20px; 
         opacity: 0; 
     }
 
