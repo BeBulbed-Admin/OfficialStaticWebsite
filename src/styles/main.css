@@ -106,7 +106,14 @@ body, .font-helvetica {
     align-items: center;
     justify-content: center;
     z-index: 1000; 
-    pointer-events: none;
+    pointer-events: none;    
+    opacity: 0;
+    animation: antiGlitchFade 0.3s ease-out 0.2s forwards;
+}
+
+@keyframes antiGlitchFade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 .hero-logo {
@@ -208,7 +215,6 @@ body, .font-helvetica {
 
 .t-row-top { display: flex; justify-content: center; gap: 30px; }
 .t-row-top .box-card { width: 180px; flex-shrink: 0; }
-.t-row-bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
 
 .box-card {
     background: var(--card-bg); 
@@ -440,11 +446,6 @@ body, .font-helvetica {
     }    
     .t-row-top { 
         width: 100%; 
-    }    
-    .t-row-bottom { 
-        display: flex; 
-        flex-direction: column; 
-        gap: 12px; 
     }    
     .box-card { 
         width: 100% !important; 
