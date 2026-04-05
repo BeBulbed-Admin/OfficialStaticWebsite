@@ -4,11 +4,25 @@ import MainLayout from '../layouts/MainLayout.astro';
 <MainLayout title="BeBulbed" isHome={true}>
     <div class="top-fade-mask"></div>
 
-    <header class="logo-hero-container">
+    <header class="logo-hero-container" id="hero-container">
         <h1 class="hero-logo font-baumans">
             <span class="flip-b">B</span><span class="collapse-text">e</span><span class="logo-spacer"></span><span>B</span><span class="collapse-text">ulbed</span>
         </h1>
     </header>
+
+    {/* The Referee: Forces the browser to finish scroll math before showing the logo */}
+    <script is:inline>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Double requestAnimationFrame ensures the browser has painted the initial frame 
+            // and restored the scroll position before we trigger the fade-in.
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    const hero = document.getElementById("hero-container");
+                    if (hero) hero.classList.add("is-ready");
+                });
+            });
+        });
+    </script>
 
     <main class="content-section">
         <div class="reveal-container slogan-gap">

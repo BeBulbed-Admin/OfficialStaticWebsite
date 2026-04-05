@@ -107,13 +107,15 @@ body, .font-helvetica {
     justify-content: center;
     z-index: 1000; 
     pointer-events: none;    
+    
+    /* THE BULLETPROOF FIX: Start completely hidden */
     opacity: 0;
-    animation: antiGlitchFade 0.3s ease-out 0.2s forwards;
+    transition: opacity 0.3s ease-out;
 }
 
-@keyframes antiGlitchFade {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+/* JavaScript will add this class only AFTER the scroll math is done */
+.logo-hero-container.is-ready {
+    opacity: 1;
 }
 
 .hero-logo {
