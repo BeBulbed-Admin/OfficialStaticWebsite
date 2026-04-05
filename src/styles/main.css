@@ -434,7 +434,7 @@ body, .font-helvetica {
 
     /* REDUCED GAP: Bringing the content closer to the hero on mobile */
     .content-section { 
-        gap: 0vh; 
+        gap: 3vh; 
         padding: 100vh 20px 5vh 20px; 
     }
 
